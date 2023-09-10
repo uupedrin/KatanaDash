@@ -6,9 +6,12 @@ using UnityEngine;
 public class PlayerTouchHandler : MonoBehaviour
 {
 	
+	// Actions
 	public static Action OnPlayerJump;	
 	public static Action OnPlayerStopJump;
 	public static Action OnPlayerDash;
+	
+	
 	
 	private float halfScreenSize;
 	
@@ -24,9 +27,11 @@ public class PlayerTouchHandler : MonoBehaviour
 		{
 			
 			Touch firstTouch = Input.GetTouch(0);
+			bool touchLeft = firstTouch.position.x < halfScreenSize;
+			
 			if(firstTouch.phase == TouchPhase.Began)
 			{
-				if(firstTouch.position.x < halfScreenSize)
+				if(touchLeft)
 				{
 					Debug.Log("Player touch: LEFT");
 					OnPlayerJump?.Invoke();
@@ -38,7 +43,7 @@ public class PlayerTouchHandler : MonoBehaviour
 				}
 			}
 			
-			if(firstTouch.phase == TouchPhase.Ended && firstTouch.position.x < halfScreenSize)
+			if(firstTouch.phase == TouchPhase.Ended && touchLeft)
 			{
 				Debug.Log("Parou de pular");
 				OnPlayerStopJump?.Invoke();
