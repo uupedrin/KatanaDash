@@ -32,23 +32,41 @@ public class Player : MonoBehaviour
 	private bool isJumping = false;
 	
 	
+	[Header("Dash System")]
+	[SerializeField]
+	private LayerMask iAmDashable;
+	[SerializeField]
+	private float dashDistance;
+	[SerializeField]
+	private float dashSpeed;
+	private RaycastHit[] dashableObjects;
+	private bool canDash = true;
+	private bool isDashing = false;
+	private Vector3 dashFinalPos;
+	
+	
+	
+	
 	private void Awake()
 	{
-		PlayerTouchHandler.OnPlayerJump += Jump;
-		PlayerTouchHandler.OnPlayerStopJump += StopJump;
-		
+		SubscribeToActions();
 		GetPlayerComponents();
 		
 		maxGravityVelocity *= -1;
 	}
+	
 	private void Update()
 	{
-		isGrounded = Physics.Raycast(transform.position,Vector3.down,2 * .5f + .2f, iAmGround);
 		
+		RunRaycasts();
+				
 		if(isGrounded)
 		{
 			ResetJump();
+			ResetDash();
 		}
+			
+		ExecuteDash();
 	}
 	
 	private void FixedUpdate()
@@ -56,10 +74,25 @@ public class Player : MonoBehaviour
 		PlayerGravity();
 	}
 	
+	
 	private void GetPlayerComponents()
 	{
 		rb = GetComponent<Rigidbody>();
 	}
+	
+	private void SubscribeToActions()
+	{
+		PlayerTouchHandler.OnPlayerJump += Jump;
+		PlayerTouchHandler.OnPlayerStopJump += StopJump;
+		PlayerTouchHandler.OnPlayerDash += Dash;
+	}
+	
+	private void RunRaycasts()
+	{
+		isGrounded = Physics.Raycast(transform.position,Vector3.down,2 * .5f + .2f, iAmGround);
+		dashableObjects = Physics.RaycastAll(transform.position, transform.forward ,dashDistance, iAmDashable);
+	}
+	
 	
 	private void PlayerGravity()
 	{
@@ -82,10 +115,13 @@ public class Player : MonoBehaviour
 		rb.velocity = new Vector3(rb.velocity.x, yForce, rb.velocity.z);
 		
 	}
+	
 	private void Jump()
 	{
 		if(canJump)
 		{
+			isDashing = false; //Cancels Dash if Jump
+			
 			rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 			canJump = false;
 			isJumping = true;
@@ -100,5 +136,31 @@ public class Player : MonoBehaviour
 	private void StopJump()
 	{
 		isJumping = false;
+	}
+	
+	
+	
+	private void Dash()
+	{
+		if(canDash && !isDashing)
+		{
+			StopJump(); //Cancels Jump if Dash
+			
+			isDashing = true;
+			dashFinalPos = new Vector3(transform.position.x + dashDistance, transform.position.y,transform.position.z);
+		}
+	}
+	
+	private void ExecuteDash()
+	{
+		if(!isDashing) return;
+		if(transform.position.x >= dashFinalPos.x) isDashing = false;
+		
+		transform.position = Vector3.MoveTowards(transform.position, dashFinalPos, dashSpeed);
+	}
+	
+	private void ResetDash()
+	{
+		canDash = true;
 	}
 }
