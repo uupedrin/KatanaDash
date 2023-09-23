@@ -7,160 +7,135 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerTouchHandler))]
 public class Player : MonoBehaviour
 {
-	private Rigidbody rb;
+	CharacterController charController;
+	Vector3 playerMovement = Vector3.zero;
 	
-	[Header("Gravity")]
+	//gravity
+	bool playerGrounded;
+	float gravity = -9.8f;
+	float groundedGravity = -.05f;
+	bool useGravity = true;
+	
+	//jumping
+	[Header("Jumping")]
 	[SerializeField]
-	private float maxGravityVelocity;
+	float maxJumpHeight = 4.0f;
 	[SerializeField]
-	private float gravityIncreaseValue;
+	float maxJumpTime = .75f;
+	bool isJumpPressed = false;
+	float initialJumpVelocity;
+	bool isJumping = false;
+	bool canJump = true;
 	
-	
-	[Header("Ground Check")]
+	//dashing
+	[Header("Dashing")]
 	[SerializeField]
-	private LayerMask iAmGround;
-	private bool isGrounded;
-	
-	
-	[Header("Jump System")]
+	float dashSpeed = 20f;
 	[SerializeField]
-	private float jumpForce = 0f;
-	[SerializeField]
-	private float maxJumpTime;
-	private float jumpTimer = 0f;
-	private bool canJump = true;
-	private bool isJumping = false;
+	float dashDuration = .7f;
+	bool isDashing = false;
+	bool canDash = true;
+	Coroutine DashCoroutine = null;
 	
 	
-	[Header("Dash System")]
-	[SerializeField]
-	private LayerMask iAmDashable;
-	[SerializeField]
-	private float dashDistance;
-	[SerializeField]
-	private float dashSpeed;
-	private RaycastHit[] dashableObjects;
-	private bool canDash = true;
-	private bool isDashing = false;
-	private Vector3 dashFinalPos;
-	
-	
-	
-	
-	private void Awake()
+	void Awake()
 	{
-		SubscribeToActions();
+		SubscribeToEvents();
 		GetPlayerComponents();
 		
-		maxGravityVelocity *= -1;
+		SetupJumpVariables();
 	}
-	
-	private void Update()
+	void Update()
 	{
-		
 		RunRaycasts();
-				
-		if(isGrounded)
-		{
-			ResetJump();
-			ResetDash();
-		}
-			
-		ExecuteDash();
-	}
-	
-	private void FixedUpdate()
-	{
-		PlayerGravity();
-	}
-	
-	
-	private void GetPlayerComponents()
-	{
-		rb = GetComponent<Rigidbody>();
-	}
-	
-	private void SubscribeToActions()
-	{
-		PlayerTouchHandler.OnPlayerJump += Jump;
-		PlayerTouchHandler.OnPlayerStopJump += StopJump;
-		PlayerTouchHandler.OnPlayerDash += Dash;
-	}
-	
-	private void RunRaycasts()
-	{
-		isGrounded = Physics.Raycast(transform.position,Vector3.down,2 * .5f + .2f, iAmGround);
-		dashableObjects = Physics.RaycastAll(transform.position, transform.forward ,dashDistance, iAmDashable);
-	}
-	
-	
-	private void PlayerGravity()
-	{
-		float yForce;
 		
-		if(isJumping)
-		{
-			jumpTimer += Time.deltaTime;
-			if(jumpTimer >= maxJumpTime)
-			{
-				StopJump();
-			}
-			yForce = Mathf.Clamp(rb.velocity.y, maxGravityVelocity/5f, 20f);
-		}
-		else
-		{
-			yForce = Mathf.Clamp(rb.velocity.y, maxGravityVelocity, 2f);
-		}
-		
-		rb.velocity = new Vector3(rb.velocity.x, yForce, rb.velocity.z);
-		
+		charController.Move(playerMovement * Time.deltaTime);
+		HandleGravity();
+		HandleJump();
 	}
 	
-	private void Jump()
+	void SubscribeToEvents()
 	{
-		if(canJump)
+		PlayerTouchHandler.OnPlayerJump += OnJump;
+		PlayerTouchHandler.OnPlayerDash += OnDash;
+	}
+	void GetPlayerComponents()
+	{
+		charController = GetComponent<CharacterController>();
+	}
+	void RunRaycasts()
+	{
+		playerGrounded = charController.isGrounded;
+	}
+	
+	void HandleGravity()
+	{
+		if(!useGravity) return;
+		
+		bool isFalling = playerMovement.y <= 0.0f || !isJumpPressed;
+		float fallMultiplier = 2.0f;
+		if(playerGrounded)
 		{
-			isDashing = false; //Cancels Dash if Jump
-			
-			rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-			canJump = false;
+			playerMovement.y = groundedGravity;
+		}
+		else if(isFalling)
+		{
+			float previousYVelocity = playerMovement.y;
+			float newYVelocity = playerMovement.y + (gravity * fallMultiplier * Time.deltaTime);
+			float nextYVelocity = (previousYVelocity + newYVelocity) * .5f;
+			playerMovement.y = nextYVelocity;
+		}
+		else 
+		{
+			float previousYVelocity = playerMovement.y;
+			float newYVelocity = playerMovement.y + (gravity * Time.deltaTime);
+			float nextYVelocity = (previousYVelocity + newYVelocity) * .5f;
+			playerMovement.y = nextYVelocity;
+		}
+	}
+	
+	void OnJump(bool value)
+	{
+		isJumpPressed = value;
+	}
+	void HandleJump()
+	{
+		if(!isJumping && playerGrounded && isJumpPressed) //Change to can jump
+		{
 			isJumping = true;
+			playerMovement.y = initialJumpVelocity * .5f;
 		}
-	}
-	
-	private void ResetJump()
-	{
-		canJump = true;
-		jumpTimer = 0f;
-	}
-	private void StopJump()
-	{
-		isJumping = false;
-	}
-	
-	
-	
-	private void Dash()
-	{
-		if(canDash && !isDashing)
+		else if(!isJumpPressed && isJumping && playerGrounded)
 		{
-			StopJump(); //Cancels Jump if Dash
-			
-			isDashing = true;
-			dashFinalPos = new Vector3(transform.position.x + dashDistance, transform.position.y,transform.position.z);
+			isJumping = false;
 		}
 	}
-	
-	private void ExecuteDash()
+	void SetupJumpVariables()
 	{
-		if(!isDashing) return;
-		if(transform.position.x >= dashFinalPos.x) isDashing = false;
-		
-		transform.position = Vector3.MoveTowards(transform.position, dashFinalPos, dashSpeed);
+		float timeToApex = maxJumpTime / 2;
+		gravity = -2 * maxJumpHeight / Mathf.Pow(timeToApex, 2);
+		initialJumpVelocity = 2 * maxJumpHeight / timeToApex;
 	}
 	
-	private void ResetDash()
+	void OnDash()
 	{
-		canDash = true;
+		if(canDash && DashCoroutine == null)
+		{
+			DashCoroutine = StartCoroutine(Dash());
+		}
+	}
+	IEnumerator Dash()
+	{
+		isDashing = true;
+		float initialXVelocity = playerMovement.x;
+		playerMovement.x += dashSpeed;
+		yield return new WaitForSeconds(dashDuration);
+		playerMovement.x = initialXVelocity;
+		isDashing = false;
+		DashCoroutine = null;
+	}
+	public bool IsDashing
+	{
+		get{return isDashing;}
 	}
 }

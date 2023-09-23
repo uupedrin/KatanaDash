@@ -489,7 +489,7 @@ Transform:
   m_GameObject: {fileID: 972440041}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 0.5, z: 5}
+  m_LocalScale: {x: 188.65718, y: 0.5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -609,7 +609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5232714027779568978, guid: 7c8156bf8d8405d47b048c36dab0bd89, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.25
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 5232714027779568978, guid: 7c8156bf8d8405d47b048c36dab0bd89, type: 3}
       propertyPath: m_LocalPosition.z
@@ -644,8 +644,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5232714027779568979, guid: 7c8156bf8d8405d47b048c36dab0bd89, type: 3}
-      propertyPath: dashSpeed
-      value: 0.04
+      propertyPath: maxJumpTime
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5232714027779568979, guid: 7c8156bf8d8405d47b048c36dab0bd89, type: 3}
+      propertyPath: maxJumpHeight
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5232714027779568990, guid: 7c8156bf8d8405d47b048c36dab0bd89, type: 3}
       propertyPath: m_Name
