@@ -7,8 +7,7 @@ public class PlayerTouchHandler : MonoBehaviour
 {
 	
 	// Actions
-	public static Action OnPlayerJump;	
-	public static Action OnPlayerStopJump;
+	public static Action<bool> OnPlayerJump;	
 	public static Action OnPlayerDash;
 	
 	
@@ -33,20 +32,17 @@ public class PlayerTouchHandler : MonoBehaviour
 			{
 				if(touchLeft)
 				{
-					Debug.Log("Player touch: LEFT");
-					OnPlayerJump?.Invoke();
+					OnPlayerJump?.Invoke(true);
 				}
 				else
 				{
-					Debug.Log("Player touch: RIGHT");
 					OnPlayerDash?.Invoke();
 				}
 			}
 			
 			if(firstTouch.phase == TouchPhase.Ended && touchLeft)
 			{
-				Debug.Log("Parou de pular");
-				OnPlayerStopJump?.Invoke();
+				OnPlayerJump?.Invoke(false);
 			}
 			
 		}
