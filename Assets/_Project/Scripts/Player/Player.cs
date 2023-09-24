@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //Requires PlayerTouchHandler
@@ -37,7 +38,9 @@ public class Player : MonoBehaviour
 	bool canDash = true;
 	Coroutine DashCoroutine = null;
 	
-	
+	//health
+	public int health;
+
 	void Awake()
 	{
 		SubscribeToEvents();
@@ -126,16 +129,35 @@ public class Player : MonoBehaviour
 	}
 	IEnumerator Dash()
 	{
+		useGravity = false;
 		isDashing = true;
 		float initialXVelocity = playerMovement.x;
 		playerMovement.x += dashSpeed;
+		playerMovement.y = 0;
 		yield return new WaitForSeconds(dashDuration);
 		playerMovement.x = initialXVelocity;
 		isDashing = false;
+		useGravity = true;
 		DashCoroutine = null;
 	}
 	public bool IsDashing
 	{
 		get{return isDashing;}
+	}
+	void OnControllerColliderHit(ControllerColliderHit hit)
+	{
+		if(!isDashing && hit.gameObject.tag == "Enemy") 
+		{
+			//add feedback
+			health--;
+			if(health <= 0)
+			{
+				//Call defeat scene;
+			}
+		}
+		else if(isDashing && hit.gameObject.tag == "Enemy") 
+		{
+			Destroy(hit.gameObject);
+		}
 	}
 }
