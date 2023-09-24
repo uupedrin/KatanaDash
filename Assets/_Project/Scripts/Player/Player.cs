@@ -149,11 +149,7 @@ public class Player : MonoBehaviour
 		if(!isDashing && hit.gameObject.tag == "Enemy") 
 		{
 			//add feedback
-			health--;
-			if(health <= 0)
-			{
-				//Call defeat scene;
-			}
+			//resetar fase
 		}
 		else if(isDashing && hit.gameObject.tag == "Enemy") 
 		{
