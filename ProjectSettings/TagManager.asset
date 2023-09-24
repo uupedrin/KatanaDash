@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Test
   - Enemy
+  - NotDashableEnemy
+  - Coin
+  - End
   layers:
   - Default
   - TransparentFX
