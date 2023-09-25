@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
 		RunRaycasts();
 		
 		charController.Move(playerMovement * Time.deltaTime);
+		Console.WriteLine(playerGrounded);
 		HandleGravity();
 		HandleJump();
 	}
@@ -145,12 +146,14 @@ public class Player : MonoBehaviour
 	{
 		get{return isDashing;}
 	}
+	
 	void OnControllerColliderHit(ControllerColliderHit hit)
 	{
 		if(!isDashing && hit.gameObject.tag == "Enemy") 
 		{
 			//add feedback
 			//resetar fase
+			Die();
 		}
 		else if(isDashing && hit.gameObject.tag == "Enemy") 
 		{
@@ -158,6 +161,7 @@ public class Player : MonoBehaviour
 		}
 		else if(hit.gameObject.tag == "Coin") 
 		{
+			GameManager.manager.AddPoints(1); 
 			Destroy(hit.gameObject);
 			//add feedback
 		}
@@ -165,10 +169,19 @@ public class Player : MonoBehaviour
 		{
 			//add feedback
 			//resetar fase
+			Die();
 		}
 		else if (hit.gameObject.tag == "End") 
 		{
 			//tela de vitoria
+			GameManager.manager.UiManager.ChangeScene("Victory");
 		}
+	}
+	
+	void Die()
+	{
+		StopAllCoroutines();
+		DashCoroutine = null;
+		GameManager.manager.UiManager.ChangeScene("Defeat");
 	}
 }
