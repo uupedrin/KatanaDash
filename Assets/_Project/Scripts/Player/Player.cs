@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
 	{
 		SubscribeToEvents();
 		GetPlayerComponents();
+		playerMovement.x = 4;
 		
 		SetupJumpVariables();
 	}
@@ -154,6 +155,20 @@ public class Player : MonoBehaviour
 		else if(isDashing && hit.gameObject.tag == "Enemy") 
 		{
 			Destroy(hit.gameObject);
+		}
+		else if(hit.gameObject.tag == "Coin") 
+		{
+			Destroy(hit.gameObject);
+			//add feedback
+		}
+		else if (hit.gameObject.tag == "NotDashableEnemy") 
+		{
+			//add feedback
+			//resetar fase
+		}
+		else if (hit.gameObject.tag == "End") 
+		{
+			//tela de vitoria
 		}
 	}
 }

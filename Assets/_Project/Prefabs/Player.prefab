@@ -51,6 +51,7 @@ MonoBehaviour:
   maxJumpTime: 0.9
   dashSpeed: 20
   dashDuration: 0.7
+  health: 5
 --- !u!114 &5232714027779568976
 MonoBehaviour:
   m_ObjectHideFlags: 0
