@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
         Pause();
         SetStatus();
     }
-    public  void Pause()
+    public void Pause()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -46,5 +46,8 @@ public class UIManager : MonoBehaviour
     {
         Application.Quit();
     }
-    
+    public void ChangeScene(string sceneName) 
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 }

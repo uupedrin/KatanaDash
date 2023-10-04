@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ public class Player : MonoBehaviour
 	bool isJumpPressed = false;
 	float initialJumpVelocity;
 	bool isJumping = false;
-	bool canJump = true;
+	//bool canJump = true;
 	
 	//dashing
 	[Header("Dashing")]
@@ -56,6 +57,8 @@ public class Player : MonoBehaviour
 		charController.Move(playerMovement * Time.deltaTime);
 		HandleGravity();
 		HandleJump();
+		Debug.Log(playerGrounded);
+		Debug.Log(playerMovement.y);
 	}
 	
 	void SubscribeToEvents()
@@ -69,7 +72,8 @@ public class Player : MonoBehaviour
 	}
 	void RunRaycasts()
 	{
-		playerGrounded = charController.isGrounded;
+		playerGrounded = charController.isGrounded; 
+		//
 	}
 	
 	void HandleGravity()
@@ -107,7 +111,7 @@ public class Player : MonoBehaviour
 		if(!isJumping && playerGrounded && isJumpPressed) //Change to can jump
 		{
 			isJumping = true;
-			playerMovement.y = initialJumpVelocity * .5f;
+			playerMovement.y = initialJumpVelocity * 0.5f;
 		}
 		else if(!isJumpPressed && isJumping && playerGrounded)
 		{
