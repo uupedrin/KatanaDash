@@ -1,0 +1,51 @@
+:root {
+    color: white;
+    -unity-font-definition: url('project://database/Assets/_Project/UI/Fonts/Signika/Signika-Regular%20SDF.asset?fileID=11400000&guid=48e81b8ec4a832a4eaf6adf3086f9d4c&type=2#Signika-Regular SDF');
+    font-size: 32px;
+    -unity-font-style: bold;
+}
+
+.logo {
+    width: 720px;
+    height: 328px;
+    background-image: url('project://database/Assets/_Project/Art/Textures/UI/katanaDash.png?fileID=21300000&guid=fc619827323a6ae44b8e07e1b9d7f9e4&type=3#katanaDash');
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.menu-button {
+    background-color: rgb(240, 23, 171);
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
+    border-top-right-radius: 60px;
+    border-bottom-right-radius: 60px;
+    border-left-color: rgb(192, 21, 138);
+    border-right-color: rgb(192, 21, 138);
+    border-top-color: rgb(192, 21, 138);
+    border-bottom-color: rgb(192, 21, 138);
+    border-left-width: 7px;
+    border-right-width: 7px;
+    border-top-width: 5px;
+    border-bottom-width: 15px;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out-elastic;
+    width: 250px;
+    height: 250px;
+}
+
+.menu-button:active {
+    scale: 1.05 1.05;
+}
+
+.button-div {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.copyrightContainer {
+    justify-self: center;
+}
+
+.credits {
+    justify-self: flex-end;
+}
