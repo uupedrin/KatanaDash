@@ -2,7 +2,6 @@
     color: white;
     -unity-font-definition: url('project://database/Assets/_Project/UI/Fonts/Signika/Signika-Regular%20SDF.asset?fileID=11400000&guid=48e81b8ec4a832a4eaf6adf3086f9d4c&type=2#Signika-Regular SDF');
     font-size: 32px;
-    -unity-font-style: bold;
 }
 
 .logo {
@@ -42,10 +41,64 @@
     justify-content: space-around;
 }
 
+.button-icons {
+    width: 80%;
+    height: 80%;
+}
+
 .copyrightContainer {
     justify-self: center;
 }
 
 .credits {
     justify-self: flex-end;
+}
+
+.overlayDiv {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.78);
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 20%;
+    padding-bottom: 20%;
+}
+
+.overlay-menu-label {
+    justify-content: center;
+    width: 80%;
+    font-size: 52px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    align-items: center;
+    white-space: normal;
+    -unity-text-align: middle-center;
+}
+
+.overlay-close-button {
+    background-color: rgb(240, 23, 171);
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
+    border-top-right-radius: 60px;
+    border-bottom-right-radius: 60px;
+    border-left-color: rgb(192, 21, 138);
+    border-right-color: rgb(192, 21, 138);
+    border-top-color: rgb(192, 21, 138);
+    border-bottom-color: rgb(192, 21, 138);
+    border-left-width: 7px;
+    border-right-width: 7px;
+    border-top-width: 5px;
+    border-bottom-width: 15px;
+    height: 100%;
+    width: 90%;
+    align-items: auto;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out-elastic;
+}
+
+.overlay-close-button:active {
+    scale: 1.05 1.05;
 }
