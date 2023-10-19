@@ -54,11 +54,10 @@
     justify-self: flex-end;
 }
 
-.overlayDiv {
+.modal-div {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.78);
     padding-left: 20%;
     padding-right: 20%;
     padding-top: 20%;
@@ -101,4 +100,15 @@
 
 .overlay-close-button:active {
     scale: 1.05 1.05;
+}
+
+.modal-div--closed {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    top: 0;
+    left: 0;
+    display: flex;
+    scale: 0 0;
 }
