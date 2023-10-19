@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/Components/Slider.uss?fileID=7433441132597879392&amp;guid=bafda1830ea4447cdbc89440b9427410&amp;type=3#Slider" />
+    <ui:Slider picking-mode="Ignore" label="Slider" value="42" high-value="100" name="customSlider" />
+</ui:UXML>

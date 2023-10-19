@@ -62,6 +62,8 @@
     padding-right: 20%;
     padding-top: 20%;
     padding-bottom: 20%;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out-back;
 }
 
 .overlay-menu-label {
