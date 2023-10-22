@@ -1,0 +1,62 @@
+#customSlider > Label {
+    display: none;
+}
+
+#customSlider #unity-drag-container {
+    background-color: rgb(255, 0, 0);
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#customSlider #unity-tracker {
+    background-color: rgb(22, 22, 22);
+    position: relative;
+    flex-grow: 1;
+    top: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#customSlider #unity-dragger {
+    background-color: rgb(255, 202, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    width: 20px;
+    height: 100%;
+    top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.bar {
+    width: 2000px;
+    height: 100%;
+    background-color: rgb(240, 23, 171);
+    align-self: flex-end;
+}
+
+.newdragger {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(32, 0, 255, 0);
+    background-image: url('project://database/Assets/_Project/Art/Textures/UI/sliderDragger.png?fileID=21300000&guid=9ed90ee38a4ee8f4188b85b8eb334f75&type=3#sliderDragger');
+    -unity-background-image-tint-color: rgba(43, 237, 253, 255);
+}
