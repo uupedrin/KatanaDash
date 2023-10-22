@@ -160,6 +160,6 @@ public class PlayerTest : MonoBehaviour
 	{
 		//StopAllCoroutines();
 		//DashCoroutine = null;
-		GameManager.manager.UiManager.ChangeScene("Defeat");
+		GameManager.manager.UiManager.ChangeScene("Game");
 	}
 }

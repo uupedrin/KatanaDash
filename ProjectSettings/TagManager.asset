@@ -9,6 +9,9 @@ TagManager:
   - NotDashableEnemy
   - Coin
   - End
+  - TutorialHole
+  - TutorialEnemy
+  - TutorialEnemyDash
   layers:
   - Default
   - TransparentFX
