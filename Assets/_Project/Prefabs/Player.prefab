@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5232714027779568976}
   - component: {fileID: 5215643919655457789}
   - component: {fileID: 6345108107383359033}
-  - component: {fileID: 3757771494984628200}
+  - component: {fileID: -7763206737115200131}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -161,7 +161,7 @@ CapsuleCollider:
   m_Height: 2.1010442
   m_Direction: 1
   m_Center: {x: 1.1489208e-17, y: 0.024650097, z: 0.016433477}
---- !u!114 &3757771494984628200
+--- !u!114 &-7763206737115200131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,14 +170,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5232714027779568990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40f8c030a5b0aed4db06e110f47af2b8, type: 3}
+  m_Script: {fileID: 11500000, guid: f78f1a16eb481044e98639c2affa3c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialspeed: 0
-  iAmGround:
-    serializedVersion: 2
-    m_Bits: 1048576
   maxJumpHeight: 4
   maxJumpTime: 0.75
   dashSpeed: 20
-  dashDuration: 0.2
+  dashDuration: 0.7
+  health: 0

@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour
 	// }
 	public void SetStatus(int score)
 	{
-		scoreText.text = "Score: " + score;
+		//scoreText.text = "Score: " + score;
 	}
 	public void Quit()
 	{

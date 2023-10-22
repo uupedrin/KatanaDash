@@ -7,7 +7,7 @@ public class PlayerTouchHandler : MonoBehaviour
 {
 	
 	// Actions
-	public static Action<bool> OnPlayerJump;	
+	public static Action<bool> OnPlayerJump;
 	public static Action OnPlayerDash;
 	
 	

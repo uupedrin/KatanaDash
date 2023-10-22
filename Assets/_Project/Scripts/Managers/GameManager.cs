@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 	public int score = 0;
 	public static GameManager manager;
 	public UIManager UiManager;
+	public float freezeDuration;
 	void Awake()
 	{
 		if (manager == null)
@@ -46,5 +47,12 @@ public class GameManager : MonoBehaviour
 		{
 			score = 0;
 		}
+	}
+
+	public IEnumerator Freeze()
+	{
+		Time.timeScale = 0;
+		yield return new WaitForSecondsRealtime(freezeDuration);
+		Time.timeScale =1;
 	}
 }

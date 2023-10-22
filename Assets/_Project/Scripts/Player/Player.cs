@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,180 +9,158 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerTouchHandler))]
 public class Player : MonoBehaviour
 {
-	CharacterController charController;
-	Vector3 playerMovement = Vector3.zero;
-	
-	//gravity
-	bool playerGrounded;
-	float gravity = -9.8f;
-	float groundedGravity = -.05f;
-	bool useGravity = true;
-	
-	//jumping
-	[Header("Jumping")]
 	[SerializeField]
-	float maxJumpHeight = 4.0f;
+	float moveSpeedStart;
+	float moveSpeed;
 	[SerializeField]
-	float maxJumpTime = .75f;
-	bool isJumpPressed = false;
-	float initialJumpVelocity;
-	bool isJumping = false;
-	bool canJump = true;
-	
-	//dashing
-	[Header("Dashing")]
+	float dashSpeed;
 	[SerializeField]
-	float dashSpeed = 20f;
+	float dashDuration;
 	[SerializeField]
-	float dashDuration = .7f;
-	bool isDashing = false;
-	bool canDash = true;
-	Coroutine DashCoroutine = null;
-	
-	//health
-	public int health;
+	float jumpForce;
+	[SerializeField]
+	float airJumpForce;
+	[SerializeField]
+	float dashJumpForce;
+	[SerializeField]
+	float jumpHold;
+	Rigidbody body;
+	private float halfScreen;
+	[SerializeField]
+	float maxVelocity;
+	bool isDashing;
+	bool canJump;
+	bool canDash;
+	[SerializeField]
+	float dashCooldown;
+	float nextDash = 0;
+	public LayerMask layer;
 
-	void Awake()
+	void Start()
 	{
-		SubscribeToEvents();
-		GetPlayerComponents();
-		playerMovement.x = 4;
-		
-		SetupJumpVariables();
+		body = GetComponent<Rigidbody>();
+		halfScreen = Screen.width / 2f;
+		moveSpeed = moveSpeedStart;
 	}
-	void Update()
+
+	void FixedUpdate()
 	{
-		RunRaycasts();
-		
-		charController.Move(playerMovement * Time.deltaTime);
-		Console.WriteLine(playerGrounded);
-		HandleGravity();
-		HandleJump();
-	}
-	
-	void SubscribeToEvents()
-	{
-		PlayerTouchHandler.OnPlayerJump += OnJump;
-		PlayerTouchHandler.OnPlayerDash += OnDash;
-	}
-	void GetPlayerComponents()
-	{
-		charController = GetComponent<CharacterController>();
-	}
-	void RunRaycasts()
-	{
-		playerGrounded = charController.isGrounded;
-	}
-	
-	void HandleGravity()
-	{
-		if(!useGravity) return;
-		
-		bool isFalling = playerMovement.y <= 0.0f || !isJumpPressed;
-		float fallMultiplier = 2.0f;
-		if(playerGrounded)
+		transform.position += UnityEngine.Vector3.right * Time.deltaTime * moveSpeed;
+		if(IsGrounded()) 
 		{
-			playerMovement.y = groundedGravity;
+			canDash = true;
+			canJump = true;
 		}
-		else if(isFalling)
+		if(Input.touchCount > 0)
 		{
-			float previousYVelocity = playerMovement.y;
-			float newYVelocity = playerMovement.y + (gravity * fallMultiplier * Time.deltaTime);
-			float nextYVelocity = (previousYVelocity + newYVelocity) * .5f;
-			playerMovement.y = nextYVelocity;
-		}
-		else 
-		{
-			float previousYVelocity = playerMovement.y;
-			float newYVelocity = playerMovement.y + (gravity * Time.deltaTime);
-			float nextYVelocity = (previousYVelocity + newYVelocity) * .5f;
-			playerMovement.y = nextYVelocity;
+			Touch playerTouch = Input.GetTouch(0);
+			if(playerTouch.position.x > halfScreen && !isDashing)
+			{
+				if(canDash && Time.time >= nextDash)
+				{
+					StartCoroutine(Dash());
+				}
+			}
+			else if (playerTouch.position.x <= halfScreen)
+			{
+				if(canJump) 
+				{
+					Jump();
+					Invoke("CantJump", jumpHold);
+				}
+			}
 		}
 	}
-	
-	void OnJump(bool value)
+
+	void Jump()
 	{
-		isJumpPressed = value;
+		if(IsGrounded()) body.AddForce(UnityEngine.Vector3.up * jumpForce);
+		else if(canJump) body.AddForce(UnityEngine.Vector3.up * airJumpForce);
 	}
-	void HandleJump()
-	{
-		if(!isJumping && playerGrounded && isJumpPressed) //Change to can jump
-		{
-			isJumping = true;
-			playerMovement.y = initialJumpVelocity * .5f;
-		}
-		else if(!isJumpPressed && isJumping && playerGrounded)
-		{
-			isJumping = false;
-		}
-	}
-	void SetupJumpVariables()
-	{
-		float timeToApex = maxJumpTime / 2;
-		gravity = -2 * maxJumpHeight / Mathf.Pow(timeToApex, 2);
-		initialJumpVelocity = 2 * maxJumpHeight / timeToApex;
-	}
-	
-	void OnDash()
-	{
-		if(canDash && DashCoroutine == null)
-		{
-			DashCoroutine = StartCoroutine(Dash());
-		}
-	}
+
 	IEnumerator Dash()
 	{
-		useGravity = false;
+		canDash = false;
 		isDashing = true;
-		float initialXVelocity = playerMovement.x;
-		playerMovement.x += dashSpeed;
-		playerMovement.y = 0;
+		//body.useGravity = false;
+		body.constraints = RigidbodyConstraints.FreezeAll;
+		moveSpeed = dashSpeed;
 		yield return new WaitForSeconds(dashDuration);
-		playerMovement.x = initialXVelocity;
+		StopDash();
+	}
+
+	void StopDash()
+	{
+		moveSpeed = moveSpeedStart;
+		body.constraints = RigidbodyConstraints.FreezeRotation;
+		//body.useGravity = true;
 		isDashing = false;
-		useGravity = true;
-		DashCoroutine = null;
+		nextDash = Time.time + dashCooldown;
 	}
-	public bool IsDashing
+
+	void OnTriggerEnter(Collider collision)
 	{
-		get{return isDashing;}
-	}
-	
-	void OnControllerColliderHit(ControllerColliderHit hit)
-	{
-		if(!isDashing && hit.gameObject.tag == "Enemy") 
+		if((collision.gameObject.tag == "Enemy" && !isDashing) || collision.gameObject.tag == "NotDashableEnemy")
 		{
-			//add feedback
-			//resetar fase
 			Die();
 		}
-		else if(isDashing && hit.gameObject.tag == "Enemy") 
+		else if(collision.gameObject.tag == "Enemy" && isDashing)
 		{
-			Destroy(hit.gameObject);
+			StartCoroutine(GameManager.manager.Freeze());
+			GameManager.manager.AddPoints(2);
+			Destroy(collision.gameObject);
 		}
-		else if(hit.gameObject.tag == "Coin") 
+		else if(collision.gameObject.tag == "DashPowerUp" && isDashing)
 		{
-			GameManager.manager.AddPoints(1); 
-			Destroy(hit.gameObject);
-			//add feedback
+			StopAllCoroutines();
+			StopDash();
+			body.AddForce(UnityEngine.Vector3.up * dashJumpForce);
 		}
-		else if (hit.gameObject.tag == "NotDashableEnemy") 
+		else if(collision.gameObject.tag == "Coin")
 		{
-			//add feedback
-			//resetar fase
-			Die();
+			GameManager.manager.AddPoints(1);
+			Destroy(collision.gameObject);
 		}
-		else if (hit.gameObject.tag == "End") 
+		else if(collision.gameObject.tag == "TutorialHole")
 		{
-			//tela de vitoria
-			GameManager.manager.UiManager.ChangeScene("Victory");
+			Recoil();
+			body.AddForce(UnityEngine.Vector3.up * 500);
+		}
+		else if(collision.gameObject.tag == "TutorialEnemy" || (collision.gameObject.tag == "TutorialEnemyDash" && !isDashing))
+		{
+			CantJump();
+			Recoil();
 		}
 	}
-	
+
 	void Die()
 	{
-		StopAllCoroutines();
-		DashCoroutine = null;
-		GameManager.manager.UiManager.ChangeScene("Defeat");
+		GameManager.manager.UiManager.ChangeScene("Game");
+	}
+
+	bool IsGrounded()
+	{
+		return Physics.Raycast(gameObject.transform.position, UnityEngine.Vector3.down, 1.025874f, layer);
+	}
+
+	void CantJump()
+	{
+		canJump = false;
+	}
+
+	void NormalMoveSpeed()
+	{
+		moveSpeed = moveSpeedStart;
+		isDashing = false;
+	}
+
+	void Recoil()
+	{
+		isDashing = true;
+		body.constraints = RigidbodyConstraints.FreezeAll;
+		body.constraints = RigidbodyConstraints.FreezeRotation;
+		body.AddForce(UnityEngine.Vector3.left * 200);
+		moveSpeed = 0;
+		Invoke("NormalMoveSpeed", 2f);
 	}
 }

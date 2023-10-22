@@ -52,7 +52,7 @@ public class PlayerTest : MonoBehaviour
 	bool canDash = true;
 	Coroutine DashCoroutine = null;
 	
-    void Awake()
+    void Start()
 	{
 		SubscribeToEvents();
 		movespeed = initialspeed;
@@ -118,7 +118,7 @@ public class PlayerTest : MonoBehaviour
 		movespeed = initialspeed;
 		isDashing = false;
 		body.constraints =  RigidbodyConstraints.FreezeRotation;
-		DashCoroutine = null;
+		//DashCoroutine = null;
 	}
 	public bool IsDashing
 	{
@@ -158,8 +158,8 @@ public class PlayerTest : MonoBehaviour
 
 	void Die()
 	{
-		StopAllCoroutines();
-		DashCoroutine = null;
-		GameManager.manager.UiManager.ChangeScene("Defeat");
+		//StopAllCoroutines();
+		//DashCoroutine = null;
+		GameManager.manager.UiManager.ChangeScene("Game");
 	}
 }
