@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	float airJumpForce;
 	[SerializeField]
+	float dashJumpForce;
+	[SerializeField]
 	float jumpHold;
 	Rigidbody body;
 	private float halfScreen;
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	float dashCooldown;
 	float nextDash = 0;
+	public LayerMask layer;
 
 	void Start()
 	{
@@ -42,7 +45,6 @@ public class Player : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		Debug.Log(canJump);
 		transform.position += UnityEngine.Vector3.right * Time.deltaTime * moveSpeed;
 		if(IsGrounded()) 
 		{
@@ -84,6 +86,11 @@ public class Player : MonoBehaviour
 		body.constraints = RigidbodyConstraints.FreezeAll;
 		moveSpeed = dashSpeed;
 		yield return new WaitForSeconds(dashDuration);
+		StopDash();
+	}
+
+	void StopDash()
+	{
 		moveSpeed = moveSpeedStart;
 		body.constraints = RigidbodyConstraints.FreezeRotation;
 		//body.useGravity = true;
@@ -99,9 +106,15 @@ public class Player : MonoBehaviour
 		}
 		else if(collision.gameObject.tag == "Enemy" && isDashing)
 		{
-			canJump = true;
+			StartCoroutine(GameManager.manager.Freeze());
 			GameManager.manager.AddPoints(2);
 			Destroy(collision.gameObject);
+		}
+		else if(collision.gameObject.tag == "DashPowerUp" && isDashing)
+		{
+			StopAllCoroutines();
+			StopDash();
+			body.AddForce(UnityEngine.Vector3.up * dashJumpForce);
 		}
 		else if(collision.gameObject.tag == "Coin")
 		{
@@ -127,7 +140,7 @@ public class Player : MonoBehaviour
 
 	bool IsGrounded()
 	{
-		return Physics.Raycast(gameObject.transform.position, UnityEngine.Vector3.down, 1.025874f);
+		return Physics.Raycast(gameObject.transform.position, UnityEngine.Vector3.down, 1.025874f, layer);
 	}
 
 	void CantJump()

@@ -12,6 +12,7 @@ TagManager:
   - TutorialHole
   - TutorialEnemy
   - TutorialEnemyDash
+  - DashPowerUp
   layers:
   - Default
   - TransparentFX
