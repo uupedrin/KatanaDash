@@ -4,8 +4,8 @@
         <ui:Button text="New Game" display-tooltip-when-elided="true" name="newGame" class="level-button" style="-unity-font-style: bold; font-size: 62px; height: 100%; width: 50%;" />
         <ui:Button text="Continue" display-tooltip-when-elided="true" name="continue" class="level-button" style="-unity-font-style: bold; font-size: 62px; height: 100%; width: 50%;" />
     </ui:VisualElement>
-    <ui:VisualElement name="transition" class="transition--on" style="display: none;" />
     <ui:VisualElement picking-mode="Ignore" style="position: absolute; width: 100%; height: 100%; justify-content: flex-start; align-items: flex-start; padding-left: 3%; padding-right: 3%; padding-top: 3%; padding-bottom: 3%;">
         <ui:Button text="X" display-tooltip-when-elided="true" name="playReturnButton" class="overlay-close-button" style="-unity-font-style: bold; font-size: 62px; height: 14%; width: 7%;" />
     </ui:VisualElement>
+    <ui:VisualElement name="transition" class="transition--on" style="display: flex;" />
 </ui:UXML>

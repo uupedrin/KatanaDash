@@ -118,13 +118,13 @@ public class MainMenuUIController : MonoBehaviour
 		_transit = RQ<VisualElement>("transition");
 		_playReturnButton = RQ<Button>("playReturnButton");
 		_newGameButton = RQ<Button>("newGame");
-		//_continueButton = RQ<Button>("continue");
+		_continueButton = RQ<Button>("continue");
 		
 		
 		//Events
 		_playReturnButton.RegisterCallback<ClickEvent>(OnPlayReturnPress);
 		_newGameButton.RegisterCallback<ClickEvent>(OnNewGamePress);
-		//_continueButton.RegisterCallback<ClickEvent>(OnContinuePress);
+		_continueButton.RegisterCallback<ClickEvent>(OnContinuePress);
 	}
 	
 	private void OnSettingsButtonClicked(ClickEvent e)
@@ -149,7 +149,7 @@ public class MainMenuUIController : MonoBehaviour
 	
 	private void OnNewGamePress(ClickEvent e)
 	{
-		Debug.Log("New Game");
+		SceneManager.LoadScene("Game");
 	}
 	private void OnContinuePress(ClickEvent e)
 	{
