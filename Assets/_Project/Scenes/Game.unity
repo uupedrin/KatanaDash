@@ -195,7 +195,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-93302
+  m_Name: pb_Mesh28160
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1917,7 +1917,7 @@ GameObject:
   - component: {fileID: 548437926}
   - component: {fileID: 548437925}
   m_Layer: 20
-  m_Name: Floor 3 (1)
+  m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2769,7 +2769,7 @@ GameObject:
   - component: {fileID: 788992832}
   m_Layer: 21
   m_Name: Undashable Enemy
-  m_TagString: TutorialEnemy
+  m_TagString: TutorialNotDashableEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3017,6 +3017,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 300690150}
+  duration: 1
+  magnitude: 2
 --- !u!114 &946158955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4197,7 +4199,7 @@ GameObject:
   - component: {fileID: 1681920027}
   m_Layer: 21
   m_Name: Dashable Enemy
-  m_TagString: TutorialEnemyDash
+  m_TagString: TutorialEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4964,6 +4966,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: -7763206737115200131, guid: 7c8156bf8d8405d47b048c36dab0bd89, type: 3}
+      propertyPath: cameraShake
+      value: 
+      objectReference: {fileID: 946158952}
     - target: {fileID: -7763206737115200131, guid: 7c8156bf8d8405d47b048c36dab0bd89, type: 3}
       propertyPath: maxVelocity
       value: 10
