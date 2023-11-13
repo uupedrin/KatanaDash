@@ -26,8 +26,6 @@ public class Player : MonoBehaviour
 	float jumpHold;
 	Rigidbody body;
 	private float halfScreen;
-	[SerializeField]
-	float maxVelocity;
 	bool isDashing;
 	bool canJump;
 	bool canDash;
@@ -151,7 +149,7 @@ public class Player : MonoBehaviour
 
 			case "Coin":
 			GameManager.manager.AddPoints(1);
-			Destroy(collision.gameObject);
+			collision.gameObject.SetActive(false);
 			break;
 
 			case "TutorialHole":
@@ -163,39 +161,6 @@ public class Player : MonoBehaviour
 			procedural.Rearrange();
 			break;
 		}
-		/*
-		if((collision.gameObject.tag == "Enemy" && !isDashing) || collision.gameObject.tag == "NotDashableEnemy")
-		{
-			Die();
-		}
-		else if(collision.gameObject.tag == "Enemy" && isDashing)
-		{
-			StartCoroutine(cameraShake.Shake());
-			StartCoroutine(GameManager.manager.Freeze());
-			GameManager.manager.AddPoints(2);
-			Destroy(collision.gameObject);
-		}
-		else if(collision.gameObject.tag == "DashPowerUp" && isDashing)
-		{
-			StopAllCoroutines();
-			StopDash();
-			body.AddForce(UnityEngine.Vector3.up * dashJumpForce);
-		}
-		else if(collision.gameObject.tag == "Coin")
-		{
-			GameManager.manager.AddPoints(1);
-			Destroy(collision.gameObject);
-		}
-		else if(collision.gameObject.tag == "TutorialHole")
-		{
-			Recoil();
-			body.AddForce(UnityEngine.Vector3.up * 500);
-		}
-		else if(collision.gameObject.tag == "TutorialNotDashableEnemy" || (collision.gameObject.tag == "TutorialEnemy" && !isDashing))
-		{
-			CantJump();
-			Recoil();
-		}*/
 	}
 
 	void Die()
@@ -234,6 +199,6 @@ public class Player : MonoBehaviour
 		StartCoroutine(cameraShake.Shake());
 		StartCoroutine(GameManager.manager.Freeze());
 		GameManager.manager.AddPoints(2);
-		Destroy(collision.gameObject);
+		collision.gameObject.SetActive(false);
 	}
 }

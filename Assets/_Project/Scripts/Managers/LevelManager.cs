@@ -7,17 +7,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     float blockSize;
     [SerializeField]
-    GameObject Block1;
-    [SerializeField]
-    GameObject Block2;
-    [SerializeField]
-    GameObject Block3;
+    GameObject[] Blocks;
     [SerializeField]
     GameObject player;
     int currentBlock;
     int blocknumber;
     
-    // Start is called before the first frame update
     void Start()
     {
         blocknumber = 0;
@@ -26,21 +21,16 @@ public class LevelManager : MonoBehaviour
 
     public void Rearrange()
     {
-        Debug.Log("oiiiiiii");
         int blockposition = (int)(player.transform.position.x / blockSize);
-        while(blocknumber == currentBlock) blocknumber = Random.Range(1,4);
+        while(blocknumber == currentBlock) blocknumber = Random.Range(0,3);
         currentBlock = blocknumber;
-        switch(blocknumber)
+        Blocks[currentBlock].transform.position = new Vector3((blockposition + 1) * blockSize, 0, 0);
+        Debug.Log(Blocks[currentBlock]);
+        for(int i = 0; i < Blocks[currentBlock].transform.childCount; i++)
         {
-            case 1:
-            Block1.transform.position = new Vector3((blockposition + 1) * blockSize, 0, 0);
-            break;
-            case 2:
-            Block2.transform.position = new Vector3((blockposition + 1) * blockSize, 0, 0);
-            break;
-            case 3:
-            Block3.transform.position = new Vector3((blockposition + 1) * blockSize, 0, 0);
-            break;
+            Blocks[currentBlock].transform.GetChild(i).gameObject.SetActive(true);
+            Debug.Log(Blocks[currentBlock]);
         }
+        
     }
 }
