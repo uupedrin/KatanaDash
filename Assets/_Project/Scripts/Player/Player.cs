@@ -35,6 +35,11 @@ public class Player : MonoBehaviour
 	float dashCooldown;
 	float nextDash = 0;
 	public LayerMask layer;
+	
+	[SerializeField]
+	Camera cameraShake;
+	[SerializeField]
+	LevelManager procedural;
 
 	void Start()
 	{
@@ -70,6 +75,10 @@ public class Player : MonoBehaviour
 				}
 			}
 		}
+		if(body.velocity.y <= -1)
+		{
+			//body.AddForce(Vector3.U)
+		}
 	}
 
 	void Jump()
@@ -100,12 +109,68 @@ public class Player : MonoBehaviour
 
 	void OnTriggerEnter(Collider collision)
 	{
+		switch(collision.gameObject.tag)
+		{
+			case "Enemy":
+			if(!isDashing) Die();
+			else
+			{
+				Kill(collision);
+			}
+			break;
+
+			case "NotDashableEnemy":
+			Die();
+			break;
+
+			case "TutorialEnemy":
+			if(!isDashing)
+			{
+				CantJump();
+				Recoil();
+			}
+			else
+			{
+				Kill(collision);
+			}
+			break;
+
+			case "TutorialNotDashableEnemy":
+			CantJump();
+			Recoil();
+			break;
+
+			case "DashPowerUp":
+			if(isDashing) 
+			{
+				StopAllCoroutines();
+				StopDash();
+				body.AddForce(UnityEngine.Vector3.up * dashJumpForce);
+			}
+			break;
+
+			case "Coin":
+			GameManager.manager.AddPoints(1);
+			Destroy(collision.gameObject);
+			break;
+
+			case "TutorialHole":
+			Recoil();
+			body.AddForce(UnityEngine.Vector3.up * 500);
+			break;
+
+			case "BlockCaller":
+			procedural.Rearrange();
+			break;
+		}
+		/*
 		if((collision.gameObject.tag == "Enemy" && !isDashing) || collision.gameObject.tag == "NotDashableEnemy")
 		{
 			Die();
 		}
 		else if(collision.gameObject.tag == "Enemy" && isDashing)
 		{
+			StartCoroutine(cameraShake.Shake());
 			StartCoroutine(GameManager.manager.Freeze());
 			GameManager.manager.AddPoints(2);
 			Destroy(collision.gameObject);
@@ -126,11 +191,11 @@ public class Player : MonoBehaviour
 			Recoil();
 			body.AddForce(UnityEngine.Vector3.up * 500);
 		}
-		else if(collision.gameObject.tag == "TutorialEnemy" || (collision.gameObject.tag == "TutorialEnemyDash" && !isDashing))
+		else if(collision.gameObject.tag == "TutorialNotDashableEnemy" || (collision.gameObject.tag == "TutorialEnemy" && !isDashing))
 		{
 			CantJump();
 			Recoil();
-		}
+		}*/
 	}
 
 	void Die()
@@ -162,5 +227,13 @@ public class Player : MonoBehaviour
 		body.AddForce(UnityEngine.Vector3.left * 200);
 		moveSpeed = 0;
 		Invoke("NormalMoveSpeed", 2f);
+	}
+
+	void Kill(Collider collision)
+	{
+		StartCoroutine(cameraShake.Shake());
+		StartCoroutine(GameManager.manager.Freeze());
+		GameManager.manager.AddPoints(2);
+		Destroy(collision.gameObject);
 	}
 }

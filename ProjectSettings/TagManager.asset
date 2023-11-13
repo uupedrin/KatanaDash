@@ -11,8 +11,9 @@ TagManager:
   - End
   - TutorialHole
   - TutorialEnemy
-  - TutorialEnemyDash
   - DashPowerUp
+  - TutorialNotDashableEnemy
+  - BlockCaller
   layers:
   - Default
   - TransparentFX
