@@ -14,6 +14,7 @@ TagManager:
   - DashPowerUp
   - TutorialNotDashableEnemy
   - BlockCaller
+  - DashJump
   layers:
   - Default
   - TransparentFX

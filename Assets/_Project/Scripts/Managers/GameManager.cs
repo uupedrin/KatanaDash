@@ -53,6 +53,6 @@ public class GameManager : MonoBehaviour
 	{
 		Time.timeScale = 0;
 		yield return new WaitForSecondsRealtime(freezeDuration);
-		Time.timeScale =1;
+		Time.timeScale = 1;
 	}
 }
