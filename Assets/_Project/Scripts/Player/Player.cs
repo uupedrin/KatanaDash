@@ -49,23 +49,21 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	GameObject bossTrigger;
 
+	[Header("PowerUp")]
+	bool isStabbing = false;
+	bool hasDashShoot = false;
+	[SerializeField]
+	float dashPowerUpDuration;
+	
 	[Header("Other")]
 	[SerializeField]
 	float cheatSpeed;
-	[SerializeField]
-	float distanceBoss;
-	float distanceNextBoss;
-	bool dashShoot = false;
-	[SerializeField]
-	float dashPowerUpDuration;
 	public int damage;
-
 	void Start()
 	{
 		body = GetComponent<Rigidbody>();
 		halfScreen = Screen.width / 2f;
 		moveSpeed = moveSpeedStart;
-		distanceNextBoss = distanceBoss;
 	}
 
 	void FixedUpdate()
@@ -95,25 +93,24 @@ public class Player : MonoBehaviour
 				}
 			}
 		}
-		else if(Input.touchCount >=4 || Input.GetKeyDown("space")) StartCoroutine(Cheat());
+		else if(Input.touchCount >=4) StartCoroutine(Cheat());
 		if(body.velocity.y <= -.5)
 		{
 			body.AddForce(UnityEngine.Vector3.up * -1 * 20);
 		}
 	}
 
-	
-
 	void OnTriggerEnter(Collider collision)
 	{
 		switch(collision.gameObject.tag)
 		{
 			case "Enemy":
-			if(!isDashing) Die();
-			else
+			if(isDashing || isStabbing) 
 			{
 				Kill(collision);
+				if(!isDashing) isStabbing = false;
 			}
+			else Die();
 			break;
 
 			case "NotDashableEnemy":
@@ -121,14 +118,15 @@ public class Player : MonoBehaviour
 			break;
 
 			case "TutorialEnemy":
-			if(!isDashing)
+			if(isDashing || isStabbing) 
 			{
-				CantJump();
-				Recoil();
+				Kill(collision);
+				if(!isDashing) isStabbing = false;
 			}
 			else
 			{
-				Kill(collision);
+				CantJump();
+				Recoil();
 			}
 			break;
 
@@ -161,8 +159,13 @@ public class Player : MonoBehaviour
 			break;
 
 			case "DashPowerUp":
-			dashShoot = true;
+			hasDashShoot = true;
 			Invoke("DashPowerUpOver", dashPowerUpDuration);
+			collision.gameObject.SetActive(false);
+			break;
+
+			case "StabPowerUp":
+			isStabbing = true;
 			collision.gameObject.SetActive(false);
 			break;
 		}
@@ -178,7 +181,7 @@ public class Player : MonoBehaviour
 
 	IEnumerator Dash()
 	{
-		if(dashShoot) projectile.SetActive(true);
+		if(hasDashShoot) projectile.SetActive(true);
 		canDash = false;
 		isDashing = true;
 		body.constraints = RigidbodyConstraints.FreezeAll;
@@ -246,7 +249,7 @@ public class Player : MonoBehaviour
 
 	void DashPowerUpOver()
 	{
-		dashShoot = false;
+		hasDashShoot = false;
 	}
 
 	void NormalMoveSpeed()

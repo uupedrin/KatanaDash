@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5664445223775758111}
   - component: {fileID: 2856258586837159096}
   m_Layer: 0
-  m_Name: PowerUp
+  m_Name: DashPowerUp
   m_TagString: DashPowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
