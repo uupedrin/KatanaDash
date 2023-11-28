@@ -9,36 +9,56 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerTouchHandler))]
 public class Player : MonoBehaviour
 {
+	[Header("Movement")]
 	[SerializeField]
 	float moveSpeedStart;
 	float moveSpeed;
+
+	[Header("Dash")]
 	[SerializeField]
 	float dashSpeed;
 	[SerializeField]
 	float dashDuration;
 	[SerializeField]
-	float jumpForce;
-	[SerializeField]
-	float airJumpForce;
-	[SerializeField]
-	float dashJumpForce;
-	[SerializeField]
-	float jumpHold;
-	Rigidbody body;
-	private float halfScreen;
-	bool isDashing;
-	bool canJump;
-	bool canDash;
-	[SerializeField]
 	float dashCooldown;
 	float nextDash = 0;
-	public LayerMask layer;
+	bool isDashing;
+	bool canDash;
+
+	[Header("Jump")]
+	[SerializeField]
+	float jumpForce;
+	[SerializeField]
+	float airJumpForce;[SerializeField]
+	float jumpHold;
+	[SerializeField]
+	float dashJumpForce;
+	bool canJump;
+	Rigidbody body;
+	private float halfScreen;
 	
+	[Header("References")]
+	[SerializeField]
+	LayerMask layer;
 	[SerializeField]
 	Camera cameraShake;
 	[SerializeField]
 	LevelManager procedural;
+	[SerializeField]
+	GameObject projectile;
+	[SerializeField]
+	GameObject bossTrigger;
 
+	[Header("PowerUp")]
+	bool isStabbing = false;
+	bool hasDashShoot = false;
+	[SerializeField]
+	float dashPowerUpDuration;
+	
+	[Header("Other")]
+	[SerializeField]
+	float cheatSpeed;
+	public int damage;
 	void Start()
 	{
 		body = GetComponent<Rigidbody>();
@@ -54,7 +74,7 @@ public class Player : MonoBehaviour
 			canDash = true;
 			canJump = true;
 		}
-		if(Input.touchCount > 0)
+		if(Input.touchCount > 0 && Input.touchCount < 4)
 		{
 			Touch playerTouch = Input.GetTouch(0);
 			if(playerTouch.position.x > halfScreen && !isDashing)
@@ -73,36 +93,11 @@ public class Player : MonoBehaviour
 				}
 			}
 		}
-		if(body.velocity.y <= -1)
+		else if(Input.touchCount >=4) StartCoroutine(Cheat());
+		if(body.velocity.y <= -.5)
 		{
-			//body.AddForce(Vector3.U)
+			body.AddForce(UnityEngine.Vector3.up * -1 * 20);
 		}
-	}
-
-	void Jump()
-	{
-		if(IsGrounded()) body.AddForce(UnityEngine.Vector3.up * jumpForce);
-		else if(canJump) body.AddForce(UnityEngine.Vector3.up * airJumpForce);
-	}
-
-	IEnumerator Dash()
-	{
-		canDash = false;
-		isDashing = true;
-		//body.useGravity = false;
-		body.constraints = RigidbodyConstraints.FreezeAll;
-		moveSpeed = dashSpeed;
-		yield return new WaitForSeconds(dashDuration);
-		StopDash();
-	}
-
-	void StopDash()
-	{
-		moveSpeed = moveSpeedStart;
-		body.constraints = RigidbodyConstraints.FreezeRotation;
-		//body.useGravity = true;
-		isDashing = false;
-		nextDash = Time.time + dashCooldown;
 	}
 
 	void OnTriggerEnter(Collider collision)
@@ -110,11 +105,12 @@ public class Player : MonoBehaviour
 		switch(collision.gameObject.tag)
 		{
 			case "Enemy":
-			if(!isDashing) Die();
-			else
+			if(isDashing || isStabbing) 
 			{
 				Kill(collision);
+				if(!isDashing) isStabbing = false;
 			}
+			else Die();
 			break;
 
 			case "NotDashableEnemy":
@@ -122,14 +118,15 @@ public class Player : MonoBehaviour
 			break;
 
 			case "TutorialEnemy":
-			if(!isDashing)
+			if(isDashing || isStabbing) 
 			{
-				CantJump();
-				Recoil();
+				Kill(collision);
+				if(!isDashing) isStabbing = false;
 			}
 			else
 			{
-				Kill(collision);
+				CantJump();
+				Recoil();
 			}
 			break;
 
@@ -138,7 +135,7 @@ public class Player : MonoBehaviour
 			Recoil();
 			break;
 
-			case "DashPowerUp":
+			case "DashJump":
 			if(isDashing) 
 			{
 				StopAllCoroutines();
@@ -160,28 +157,51 @@ public class Player : MonoBehaviour
 			case "BlockCaller":
 			procedural.Rearrange();
 			break;
+
+			case "DashPowerUp":
+			hasDashShoot = true;
+			Invoke("DashPowerUpOver", dashPowerUpDuration);
+			collision.gameObject.SetActive(false);
+			break;
+
+			case "StabPowerUp":
+			isStabbing = true;
+			collision.gameObject.SetActive(false);
+			break;
 		}
 	}
-
-	void Die()
+	
+	//RECURRING METHODS__________________________________________________________________
+	
+	void Jump()
 	{
-		GameManager.manager.UiManager.ChangeScene("Game");
+		if(IsGrounded()) body.AddForce(UnityEngine.Vector3.up * jumpForce);
+		else if(canJump) body.AddForce(UnityEngine.Vector3.up * airJumpForce);
 	}
 
-	bool IsGrounded()
+	IEnumerator Dash()
 	{
-		return Physics.Raycast(gameObject.transform.position, UnityEngine.Vector3.down, 1.025874f, layer);
+		if(hasDashShoot) projectile.SetActive(true);
+		canDash = false;
+		isDashing = true;
+		body.constraints = RigidbodyConstraints.FreezeAll;
+		moveSpeed = dashSpeed;
+		yield return new WaitForSeconds(dashDuration);
+		StopDash();
 	}
 
-	void CantJump()
-	{
-		canJump = false;
-	}
-
-	void NormalMoveSpeed()
+	void StopDash()
 	{
 		moveSpeed = moveSpeedStart;
+		body.constraints = RigidbodyConstraints.FreezeRotation;
 		isDashing = false;
+		nextDash = Time.time + dashCooldown;
+	}
+	public void Kill(Collider collision)
+	{
+		StartCoroutine(GameManager.manager.Freeze());
+		GameManager.manager.AddPoints(2);
+		collision.gameObject.SetActive(false);
 	}
 
 	void Recoil()
@@ -193,12 +213,49 @@ public class Player : MonoBehaviour
 		moveSpeed = 0;
 		Invoke("NormalMoveSpeed", 2f);
 	}
-
-	void Kill(Collider collision)
+	
+	void Die()
 	{
-		StartCoroutine(cameraShake.Shake());
-		StartCoroutine(GameManager.manager.Freeze());
-		GameManager.manager.AddPoints(2);
-		collision.gameObject.SetActive(false);
+		GameManager.manager.UiManager.ChangeScene("Game");
 	}
+
+	bool IsGrounded()
+	{
+		return Physics.Raycast(gameObject.transform.position, UnityEngine.Vector3.down, 1.025874f, layer);
+	}
+
+	IEnumerator Cheat()
+	{
+		body.detectCollisions = false;
+		body.constraints = RigidbodyConstraints.FreezeAll;
+		moveSpeed = cheatSpeed;
+		yield return new WaitUntil(() => transform.position.x >= bossTrigger.transform.position.x - 5);
+		CheatStop();
+	}
+
+	void CheatStop()
+	{
+		moveSpeed = moveSpeedStart;
+		body.constraints = RigidbodyConstraints.FreezeRotation;
+		body.detectCollisions = true;
+	}
+	
+	//INVOKABLE METHODS__________________________________________________________________
+
+	void CantJump()
+	{
+		canJump = false;
+	}
+
+	void DashPowerUpOver()
+	{
+		hasDashShoot = false;
+	}
+
+	void NormalMoveSpeed()
+	{
+		moveSpeed = moveSpeedStart;
+		isDashing = false;
+	}
+
 }
