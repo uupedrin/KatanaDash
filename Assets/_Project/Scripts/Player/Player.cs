@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 //Requires PlayerTouchHandler
-[RequireComponent(typeof(PlayerTouchHandler))]
+//[RequireComponent(typeof(PlayerTouchHandler))]
 public class Player : MonoBehaviour
 {
 	[Header("Movement")]
@@ -217,6 +217,8 @@ public class Player : MonoBehaviour
 	void Die()
 	{
 		GameManager.manager.UiManager.ChangeScene("Game");
+		GameManager.manager.HighScore();
+		GameManager.manager.Achievements(nextDash);
 	}
 
 	bool IsGrounded()

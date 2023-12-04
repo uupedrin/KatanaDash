@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -150,6 +152,7 @@ public class MainMenuUIController : MonoBehaviour
 	private void OnNewGamePress(ClickEvent e)
 	{
 		SceneManager.LoadScene("Game");
+		//GameManager.manager.Achievements();
 	}
 	private void OnContinuePress(ClickEvent e)
 	{
