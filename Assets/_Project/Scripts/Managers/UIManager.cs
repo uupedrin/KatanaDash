@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-	public Text scoreText;
+	public TMP_Text scoreText;
 	// public GameObject pauseMenu;
 	// public GameObject config;
 	// public GameObject gameUi;
@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour
 	// }
 	public void SetStatus(int score)
 	{
-		//scoreText.text = "Score: " + score;
+		scoreText.text = "Score: " + score;
 	}
 	public void Quit()
 	{
