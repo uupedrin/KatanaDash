@@ -76,9 +76,11 @@ public class GameManager : MonoBehaviour
 		if(dashed > 0) achievement[0] = true;
 		if(Convert.ToInt32(File.ReadAllText("coinsrecord.json")) >= 10) achievement[1] = true;
 		if(Convert.ToInt32(File.ReadAllText("coinstotal.json")) >= 30) achievement[2] = true;
-	}
+        if (Convert.ToInt32(File.ReadAllText("coinstotal.json")) >= 100) achievement[3] = true;
 
-	void DeleteSave()
+    }
+
+    void DeleteSave()
 	{
 		File.WriteAllText("highscore.json", "0");
 		for(int i = 0; i < achievement.Length; i++)
