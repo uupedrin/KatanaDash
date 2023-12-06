@@ -2,17 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
-using UnityEditor.Build.Content;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-	public int score = 0;
+	public int coins = 0;
+	private float metersRan;
+	private float metersTimer;
+	private float finalMeters;
 	public static GameManager manager;
 	public UIManager UiManager;
 	public float freezeDuration;
@@ -36,35 +34,53 @@ public class GameManager : MonoBehaviour
 		
 		SceneManager.activeSceneChanged += ResetGame;
 	}
-
+	
+	private void Update()
+	{
+		metersTimer += Time.deltaTime;
+		metersRan = 2.08f * metersTimer;
+		metersRan = (float)Math.Round(metersRan,1);
+		if(finalMeters == 0)
+		{
+			UiManager.SetStatus(metersRan);
+		}
+	}
+	
 	public void AddPoints(int enemyType)
 	{
 		switch (enemyType)
 		{
-			case 1:
-				score += 500;
+			case 1: // coins
+				coins += 1;
 				data.achievement[0] = true;
 				data.records[0]++;
 				SaveToJson();
+				UiManager.SetCoins(coins);
 				break;
 			case 2:
-				score += 1000;
+				//score += 1000;
 				break;
 			case 3:
-				score += 1500;
+				//score += 1500;
 				break;
 		}
-		UiManager.SetStatus(score);
 	}
 	
 	public void ResetGame(Scene current, Scene next)
 	{
 		if(next.name == "Game")
 		{
-			score = 0;
+			coins = 0;
+			metersRan = 0;
+			finalMeters = 0;
 		}
 	}
 
+	public void EndGame()
+	{
+		finalMeters = metersRan;
+	}
+	
 	public IEnumerator Freeze()
 	{
 		Time.timeScale = 0;
@@ -74,13 +90,13 @@ public class GameManager : MonoBehaviour
 
 	public void HighScore()
 	{
-		if(!File.Exists("highscore.json") || Convert.ToInt32(File.ReadAllText("highscore.json")) < score) File.WriteAllText("highscore.json", score.ToString());
+		if(!File.Exists("highscore.json") || Convert.ToInt32(File.ReadAllText("highscore.json")) < metersRan) File.WriteAllText("highscore.json", metersRan.ToString());
 	}
 
 	public void NewAchievement(int achievementID)
 	{
 		data.achievement[achievementID] = true;
-    }
+	}
 
 	public void SaveToJson()
 	{

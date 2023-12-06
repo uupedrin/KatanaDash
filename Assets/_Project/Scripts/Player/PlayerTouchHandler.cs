@@ -10,42 +10,13 @@ public class PlayerTouchHandler : MonoBehaviour
 	public static Action<bool> OnPlayerJump;
 	public static Action OnPlayerDash;
 	
-	
-	
-	private float halfScreenSize;
-	
-	void Awake()
+	public void JumpButton(bool state)
 	{
-		halfScreenSize = Screen.width / 2f;
+		OnPlayerJump?.Invoke(state);
 	}
-
-	void Update()
+	public void DashButton()
 	{
-		bool playerTouch = Input.touchCount > 0;
-		if(playerTouch)
-		{
-			
-			Touch firstTouch = Input.GetTouch(0);
-			bool touchLeft = firstTouch.position.x < halfScreenSize;
-			
-			if(firstTouch.phase == TouchPhase.Began)
-			{
-				if(touchLeft)
-				{
-					OnPlayerJump?.Invoke(true);
-				}
-				else
-				{
-					OnPlayerDash?.Invoke();
-				}
-			}
-			
-			if(firstTouch.phase == TouchPhase.Ended && touchLeft)
-			{
-				OnPlayerJump?.Invoke(false);
-			}
-			
-		}
+		OnPlayerDash?.Invoke();
 	}
 	
 	private void HandleCheats()
