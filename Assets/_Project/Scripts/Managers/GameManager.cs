@@ -7,10 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	public int coins = 0;
-	private float metersRan;
-	private float metersTimer;
-	private float finalMeters;
+    [SerializeField]
+    public int coins = 0;
+    [SerializeField]
+    public float metersRan;
+    [SerializeField]
+    public float metersTimer;
+    [SerializeField]
+    public float finalMeters;
 	public static GameManager manager;
 	public UIManager UiManager;
 	public float freezeDuration;
@@ -31,10 +35,7 @@ public class GameManager : MonoBehaviour
 		SaveToJson();
 		LoadFromJson();
 		DontDestroyOnLoad(gameObject);
-		
-		SceneManager.activeSceneChanged += ResetGame;
 	}
-	
 	private void Update()
 	{
 		metersTimer += Time.deltaTime;
@@ -45,7 +46,6 @@ public class GameManager : MonoBehaviour
 			UiManager.SetStatus(metersRan);
 		}
 	}
-	
 	public void AddPoints(int enemyType)
 	{
 		switch (enemyType)
@@ -65,29 +65,16 @@ public class GameManager : MonoBehaviour
 				break;
 		}
 	}
-	
-	public void ResetGame(Scene current, Scene next)
-	{
-		if(next.name == "Game")
-		{
-			coins = 0;
-			metersRan = 0;
-			finalMeters = 0;
-		}
-	}
-
 	public void EndGame()
 	{
 		finalMeters = metersRan;
 	}
-	
 	public IEnumerator Freeze()
 	{
 		Time.timeScale = 0;
 		yield return new WaitForSecondsRealtime(freezeDuration);
 		Time.timeScale = 1;
 	}
-
 	public void HighScore()
 	{
 		if(!File.Exists("highscore.json") || Convert.ToInt32(File.ReadAllText("highscore.json")) < metersRan) File.WriteAllText("highscore.json", metersRan.ToString());

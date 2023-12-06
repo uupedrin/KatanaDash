@@ -229,7 +229,8 @@ public class Player : MonoBehaviour
 	
 	void Die()
 	{
-		GameManager.manager.UiManager.ChangeScene("Game");
+		GameManager.manager.EndGame();
+		GameManager.manager.UiManager.EndGameScreen(GameManager.manager.finalMeters, GameManager.manager.coins);
 		GameManager.manager.HighScore();
 	}
 
