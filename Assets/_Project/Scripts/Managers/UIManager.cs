@@ -34,9 +34,16 @@ public class UIManager : MonoBehaviour
 	}
 	public void PauseGame()
 	{
-		Time.timeScale = 0f;
-		pauseMenu.SetActive(true);
-		isPaused = true;
+		if(isPaused) 
+		{
+			ResumeGame();
+		}
+		else 
+		{
+            Time.timeScale = 0f;
+            pauseMenu.SetActive(true);
+            isPaused = true;
+        }
 	}
 	public void ResumeGame()
 	{
@@ -46,11 +53,20 @@ public class UIManager : MonoBehaviour
 	}
 	public void EndGameScreen(float finalMeters, int coins)
 	{
-		finalMetersText.text = finalMeters.ToString();
+        Time.timeScale = 0f;
+        isPaused = true;
+        finalMetersText.text = finalMeters.ToString();
 		finalCoinText.text = coins.ToString();
 		endGameMenu.SetActive(true);		
 	}
-	public void Quit()
+    public void ResetGame()
+    {
+        GameManager.manager.coins = 0;
+        GameManager.manager.metersRan = 0;
+        GameManager.manager.finalMeters = 0;
+        GameManager.manager.metersTimer = 0;
+    }
+    public void Quit()
 	{
 		Application.Quit();
 	}

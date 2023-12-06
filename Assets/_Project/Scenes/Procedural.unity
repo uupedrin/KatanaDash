@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4775,6 +4775,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1246293616}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1246293616}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 5
         m_Arguments:
@@ -4783,6 +4795,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Procedural
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1246293616}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ResetGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &942304289
@@ -6492,9 +6516,9 @@ MonoBehaviour:
   metersText: {fileID: 1353541006}
   finalMetersText: {fileID: 379001135}
   coinText: {fileID: 2088089200}
-  finalCoinText: {fileID: 0}
+  finalCoinText: {fileID: 1630141564}
   pauseMenu: {fileID: 1036896006}
-  endGameMenu: {fileID: 0}
+  endGameMenu: {fileID: 1446315185}
   isPaused: 0
 --- !u!4 &1246293617
 Transform:
@@ -6684,7 +6708,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1638340291}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: EndGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7709,7 +7733,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coins: 0
-  UiManager: {fileID: 0}
+  metersRan: 0
+  metersTimer: 0
+  finalMeters: 0
+  UiManager: {fileID: 1246293616}
   freezeDuration: 0.15
   data:
     achievement: 0000000000
