@@ -67,35 +67,38 @@ public class Player : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		transform.position += UnityEngine.Vector3.right * Time.deltaTime * moveSpeed;
-		if(IsGrounded()) 
+		if(!UIManager.isPaused)
 		{
-			canDash = true;
-			canJump = true;
-		}
-		if(Input.touchCount > 0 && Input.touchCount < 4)
-		{
-			Touch playerTouch = Input.GetTouch(0);
-			if(playerTouch.position.x > halfScreen && !isDashing)
+			transform.position += UnityEngine.Vector3.right * Time.deltaTime * moveSpeed;
+			if(IsGrounded()) 
 			{
-				if(canDash && Time.time >= nextDash)
+				canDash = true;
+				canJump = true;
+			}
+			if(Input.touchCount > 0 && Input.touchCount < 4)
+			{
+				Touch playerTouch = Input.GetTouch(0);
+				if(playerTouch.position.x > halfScreen && !isDashing)
 				{
-					StartCoroutine(Dash());
+					if(canDash && Time.time >= nextDash)
+					{
+						StartCoroutine(Dash());
+					}
+				}
+				else if (playerTouch.position.x <= halfScreen)
+				{
+					if(canJump) 
+					{
+						Jump();
+						Invoke("CantJump", jumpHold);
+					}
 				}
 			}
-			else if (playerTouch.position.x <= halfScreen)
+			else if(Input.touchCount >=4) StartCoroutine(Cheat());
+			if(body.velocity.y <= -.5)
 			{
-				if(canJump) 
-				{
-					Jump();
-					Invoke("CantJump", jumpHold);
-				}
+				body.AddForce(UnityEngine.Vector3.up * -1 * 20);
 			}
-		}
-		else if(Input.touchCount >=4) StartCoroutine(Cheat());
-		if(body.velocity.y <= -.5)
-		{
-			body.AddForce(UnityEngine.Vector3.up * -1 * 20);
 		}
 	}
 
