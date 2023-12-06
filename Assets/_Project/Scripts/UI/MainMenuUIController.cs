@@ -157,6 +157,7 @@ public class MainMenuUIController : MonoBehaviour
 	private void OnContinuePress(ClickEvent e)
 	{
 		Debug.Log("Continue");
+		//GameManager.manager.DeleteSave();
 	}
 	
 	private T RQ<T>(string elementName) where T : VisualElement
