@@ -8,47 +8,35 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
 	public TMP_Text scoreText;
-	// public GameObject pauseMenu;
-	// public GameObject config;
-	// public GameObject gameUi;
-	// private bool isPause;
-
+	public GameObject pauseMenu;
+    public static bool isPaused;
 	private void Start()
 	{
 		GameManager.manager.UiManager = this;
+		pauseMenu.SetActive(false);
 	}
-	
-	// public void Pause()
-	// {
-	// 	if (Input.GetKeyDown(KeyCode.P))
-	// 	{
-	// 		isPause = !isPause;
-	// 		if (isPause)
-	// 		{
-	// 			Time.timeScale = 0;
-	// 			pauseMenu.gameObject.SetActive(true);
-	// 			gameUi.gameObject.SetActive(false);
-	// 		}
-	// 		else
-	// 		{
-	// 			Time.timeScale = 1;
-	// 			pauseMenu.gameObject.SetActive(false);
-	// 			gameUi.gameObject.SetActive(true);
-	// 		}
-
-	// 	}
-	// }
 	public void SetStatus(int score)
 	{
 		scoreText.text = "Score: " + score;
-	}
-	public void Quit()
-	{
-		Debug.Log("Quit");
-		Application.Quit();
 	}
 	public void ChangeScene(string scene)
 	{
 		SceneManager.LoadScene(scene);
 	}
+	public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        pauseMenu.SetActive(true);
+        isPaused = true;
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        pauseMenu.SetActive(false);
+        isPaused = false;
+    }
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

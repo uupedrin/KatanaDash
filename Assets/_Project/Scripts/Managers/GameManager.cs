@@ -5,7 +5,10 @@ using System.IO;
 using Unity.VisualScripting;
 using UnityEditor.Build.Content;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,11 +16,11 @@ public class GameManager : MonoBehaviour
 	public static GameManager manager;
 	public UIManager UiManager;
 	public float freezeDuration;
-	public bool[] achievement;
+	[SerializeField]
+	Achievements data;
 	void Awake()
 	{
-		if(!File.Exists("coinsrecord.json") || Convert.ToInt32(File.ReadAllText("coinsrecord.json")) < 10) File.WriteAllText("coinsrecord.json", "0");
-		if(!File.Exists("coinstotal.json")) File.WriteAllText("coinstotal.json", "0");
+		data = new Achievements();
 		HighScore();
 		if (manager == null)
 		{
@@ -27,6 +30,8 @@ public class GameManager : MonoBehaviour
 		{
 			Destroy(this.gameObject);
 		}
+		SaveToJson();
+		LoadFromJson();
 		DontDestroyOnLoad(gameObject);
 		
 		SceneManager.activeSceneChanged += ResetGame;
@@ -38,8 +43,9 @@ public class GameManager : MonoBehaviour
 		{
 			case 1:
 				score += 500;
-				File.WriteAllText("coinsrecord.json", (Convert.ToInt32(File.ReadAllText("coinsrecord.json"))+1).ToString());
-				File.WriteAllText("coinstotal.json", (Convert.ToInt32(File.ReadAllText("coinstotal.json"))+1).ToString());
+				data.achievement[0] = true;
+				data.records[0]++;
+				SaveToJson();
 				break;
 			case 2:
 				score += 1000;
@@ -71,23 +77,31 @@ public class GameManager : MonoBehaviour
 		if(!File.Exists("highscore.json") || Convert.ToInt32(File.ReadAllText("highscore.json")) < score) File.WriteAllText("highscore.json", score.ToString());
 	}
 
-	public void Achievements(float dashed)
+	public void NewAchievement(int achievementID)
 	{
-		if(dashed > 0) achievement[0] = true;
-		if(Convert.ToInt32(File.ReadAllText("coinsrecord.json")) >= 10) achievement[1] = true;
-		if(Convert.ToInt32(File.ReadAllText("coinstotal.json")) >= 30) achievement[2] = true;
-        if (Convert.ToInt32(File.ReadAllText("coinstotal.json")) >= 100) achievement[3] = true;
-
+		data.achievement[achievementID] = true;
     }
 
-    void DeleteSave()
+	public void SaveToJson()
 	{
-		File.WriteAllText("highscore.json", "0");
-		for(int i = 0; i < achievement.Length; i++)
+		string json = JsonUtility.ToJson(data, true);
+		File.WriteAllText(Application.persistentDataPath + "/AchievementsDataFile.json", json);
+	}
+	public void LoadFromJson()
+	{
+		string json = "";
+		if(File.Exists(Application.persistentDataPath + "/AchievementsDataFile.json"))
 		{
-			achievement[i] = false;
+			json = File.ReadAllText(Application.persistentDataPath + "/AchievementsDataFile.json");
 		}
-		File.Delete("coinstotal.json");
-		File.Delete("coinsrecord.json");
+		data = JsonUtility.FromJson<Achievements>(json);
 	}
 }
+
+/*
+ACHIEVEMENTS:
+0 - First Dash
+1 - Collected 10 coins in one run
+2 - Collected 30 total coins
+3 - Died while in the air
+*/

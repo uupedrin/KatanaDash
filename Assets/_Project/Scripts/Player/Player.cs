@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 	[Header("Movement")]
 	[SerializeField]
 	float moveSpeedStart;
-	float moveSpeed;
+	public float moveSpeed;
 
 	[Header("Dash")]
 	[SerializeField]
@@ -58,7 +58,6 @@ public class Player : MonoBehaviour
 	[Header("Other")]
 	[SerializeField]
 	float cheatSpeed;
-	public int damage;
 	void Start()
 	{
 		body = GetComponent<Rigidbody>();
@@ -218,7 +217,6 @@ public class Player : MonoBehaviour
 	{
 		GameManager.manager.UiManager.ChangeScene("Game");
 		GameManager.manager.HighScore();
-		GameManager.manager.Achievements(nextDash);
 	}
 
 	bool IsGrounded()
