@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	float dashJumpForce;
 	bool canJump;
+	bool jumpButtonHeld = false;
 	Rigidbody body;
 	private float halfScreen;
 	
@@ -67,38 +68,27 @@ public class Player : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if(!UIManager.isPaused)
+		if(GameManager.manager.UiManager.isPaused) return;
+		
+		transform.position += UnityEngine.Vector3.right * Time.deltaTime * moveSpeed;
+		if(IsGrounded()) 
 		{
-			transform.position += UnityEngine.Vector3.right * Time.deltaTime * moveSpeed;
-			if(IsGrounded()) 
+			canDash = true;
+			canJump = true;
+		}
+		
+		if(jumpButtonHeld)
+		{
+			if(canJump) 
 			{
-				canDash = true;
-				canJump = true;
+				Jump();
+				Invoke("CantJump", jumpHold);
 			}
-			if(Input.touchCount > 0 && Input.touchCount < 4)
-			{
-				Touch playerTouch = Input.GetTouch(0);
-				if(playerTouch.position.x > halfScreen && !isDashing)
-				{
-					if(canDash && Time.time >= nextDash)
-					{
-						StartCoroutine(Dash());
-					}
-				}
-				else if (playerTouch.position.x <= halfScreen)
-				{
-					if(canJump) 
-					{
-						Jump();
-						Invoke("CantJump", jumpHold);
-					}
-				}
-			}
-			else if(Input.touchCount >=4) StartCoroutine(Cheat());
-			if(body.velocity.y <= -.5)
-			{
-				body.AddForce(UnityEngine.Vector3.up * -1 * 20);
-			}
+		}
+		if(Input.touchCount >=4) StartCoroutine(Cheat());
+		if(body.velocity.y <= -.5)
+		{
+			body.AddForce(UnityEngine.Vector3.up * -1 * 20);
 		}
 	}
 
@@ -172,6 +162,27 @@ public class Player : MonoBehaviour
 			break;
 		}
 	}
+	
+	//CONTROL HANDLING FUNCTIONS
+	public void JumpButtonPress(bool state)
+	{
+		if(GameManager.manager.UiManager.isPaused) return;
+		
+		jumpButtonHeld = state;
+	}
+	public void DashButtonPress()
+	{
+		if(GameManager.manager.UiManager.isPaused) return;
+		
+		if(!isDashing)
+		{
+			if(canDash && Time.time >= nextDash)
+			{
+				StartCoroutine(Dash());
+			}
+		}
+	}
+	
 	
 	//RECURRING METHODS__________________________________________________________________
 	

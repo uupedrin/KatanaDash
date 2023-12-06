@@ -7,36 +7,51 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-	public TMP_Text scoreText;
+	public Text metersText;
+	public Text finalMetersText;
+	public Text coinText;
+	public Text finalCoinText;
 	public GameObject pauseMenu;
-    public static bool isPaused;
+	public GameObject endGameMenu;
+	public bool isPaused;
 	private void Start()
 	{
 		GameManager.manager.UiManager = this;
-		pauseMenu.SetActive(false);
+		if(pauseMenu != null) pauseMenu.SetActive(false);
 	}
-	public void SetStatus(int score)
+	
+	public void SetCoins(int coins)
 	{
-		scoreText.text = "Score: " + score;
+		coinText.text = coins.ToString();
+	}
+	public void SetStatus(float metersRan)
+	{
+		metersText.text = metersRan + " m";
 	}
 	public void ChangeScene(string scene)
 	{
 		SceneManager.LoadScene(scene);
 	}
 	public void PauseGame()
-    {
-        Time.timeScale = 0f;
-        pauseMenu.SetActive(true);
-        isPaused = true;
-    }
-    public void ResumeGame()
-    {
-        Time.timeScale = 1f;
-        pauseMenu.SetActive(false);
-        isPaused = false;
-    }
-    public void Quit()
-    {
-        Application.Quit();
-    }
+	{
+		Time.timeScale = 0f;
+		pauseMenu.SetActive(true);
+		isPaused = true;
+	}
+	public void ResumeGame()
+	{
+		Time.timeScale = 1f;
+		pauseMenu.SetActive(false);
+		isPaused = false;
+	}
+	public void EndGameScreen(float finalMeters, int coins)
+	{
+		finalMetersText.text = finalMeters.ToString();
+		finalCoinText.text = coins.ToString();
+		endGameMenu.SetActive(true);		
+	}
+	public void Quit()
+	{
+		Application.Quit();
+	}
 }
