@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/Defeat.unity
     guid: 5c4adc51c60320949a3dc9627e7e560e
+  - enabled: 1
+    path: Assets/_Project/Scenes/Procedural.unity
+    guid: a6a881af97601844c9427357ed6a52bf
   m_configObjects: {}
