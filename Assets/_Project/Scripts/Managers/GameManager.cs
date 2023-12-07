@@ -7,14 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    public int coins = 0;
-    [SerializeField]
-    public float metersRan;
-    [SerializeField]
-    public float metersTimer;
-    [SerializeField]
-    public float finalMeters;
+	[SerializeField]
+	public int coins = 0;
+	[SerializeField]
+	public float metersRan;
+	[SerializeField]
+	public float metersTimer;
+	[SerializeField]
+	public float finalMeters;
 	public static GameManager manager;
 	public UIManager UiManager;
 	public float freezeDuration;

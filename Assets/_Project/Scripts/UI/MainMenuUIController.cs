@@ -151,7 +151,7 @@ public class MainMenuUIController : MonoBehaviour
 	
 	private void OnNewGamePress(ClickEvent e)
 	{
-		SceneManager.LoadScene("Game");
+		SceneManager.LoadScene("Procedural");
 		//GameManager.manager.Achievements();
 	}
 	private void OnContinuePress(ClickEvent e)
