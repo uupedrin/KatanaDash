@@ -10,8 +10,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	[Header("Movement")]
-	[SerializeField]
-	float moveSpeedStart;
+	public float moveSpeedStart;
 	public float moveSpeed;
 
 	[Header("Dash")]
@@ -169,6 +168,10 @@ public class Player : MonoBehaviour
 			case "StabPowerUp":
 			isStabbing = true;
 			collision.gameObject.SetActive(false);
+			break;
+
+			case "BossCaller":
+			GameManager.manager.bossfight = true;
 			break;
 		}
 	}
