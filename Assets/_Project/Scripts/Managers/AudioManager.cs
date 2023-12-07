@@ -8,34 +8,34 @@ using UnityEngine.UI;
 public class AudioManager : MonoBehaviour
 {
 	[SerializeField] private AudioMixer mixer;
+	public Slider masterSlider;
+	public Slider musicSlider;
+	public Slider sfxSlider;
 	
 	public static AudioManager manager;
 	
 	void Awake()
 	{
-		 if(manager == null){
+		if(manager == null)
+		{
 			manager = this;
 		}
-		else{
+		else
+		{
 			Destroy(gameObject);
 		}
 		DontDestroyOnLoad(this);
 	}
-	
-	void OnEnable()
+	public void ChangeMasterVol()
 	{
-		VolumeController.OnMasterSliderChange += ChangeMasterVol;
-		VolumeController.OnMusicSliderChange += ChangeMusicVol;
-		VolumeController.OnSFXSliderChange += ChangeSFXVol;
+		mixer.SetFloat("MasterVolume", (masterSlider.value));
 	}
-	
-	public void ChangeMasterVol(float volume){
-		mixer.SetFloat("MasterVolume", volume);
+	public void ChangeMusicVol()
+	{
+		mixer.SetFloat("MusicVolume",(musicSlider.value));
 	}
-	public void ChangeMusicVol(float volume){
-		mixer.SetFloat("MusicVolume", volume);
-	}
-	public void ChangeSFXVol(float volume){
-		mixer.SetFloat("SfxVolume", volume);
+	public void ChangeSFXVol()
+	{
+		mixer.SetFloat("SfxVolume", (sfxSlider.value));
 	}
 }
