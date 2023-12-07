@@ -24,7 +24,6 @@ public class AudioManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
-		DontDestroyOnLoad(this);
 	}
 	public void ChangeMasterVol()
 	{
