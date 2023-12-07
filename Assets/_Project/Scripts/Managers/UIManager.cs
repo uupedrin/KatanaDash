@@ -12,13 +12,15 @@ public class UIManager : MonoBehaviour
 	public Text coinText;
 	public Text finalCoinText;
 	public GameObject pauseMenu;
+	public GameObject configMenu;
 	public GameObject endGameMenu;
 	public bool isPaused;
 	private void Start()
 	{
 		GameManager.manager.UiManager = this;
 		if(pauseMenu != null) pauseMenu.SetActive(false);
-	}
+        if (configMenu != null) configMenu.SetActive(false);
+    }
 	
 	public void SetCoins(int coins)
 	{
@@ -32,7 +34,18 @@ public class UIManager : MonoBehaviour
 	{
 		SceneManager.LoadScene(scene);
 	}
-	public void PauseGame()
+    public void SetConfigMenu()
+    {
+		if(configMenu.activeInHierarchy == false) 
+		{
+			configMenu.SetActive(true);
+		}
+		else 
+		{
+			configMenu.SetActive(false);
+		}
+    }
+    public void PauseGame()
 	{
 		if(isPaused) 
 		{
