@@ -10,55 +10,41 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	[Header("Movement")]
-	[SerializeField]
-	float moveSpeedStart;
+	[SerializeField] float moveSpeedStart;
 	public float moveSpeed;
 
 	[Header("Dash")]
-	[SerializeField]
-	float dashSpeed;
-	[SerializeField]
-	float dashDuration;
-	[SerializeField]
-	float dashCooldown;
+	[SerializeField] float dashSpeed;
+	[SerializeField] float dashDuration;
+	[SerializeField] float dashCooldown;
 	float nextDash = 0;
 	bool isDashing;
 	bool canDash;
 
 	[Header("Jump")]
-	[SerializeField]
-	float jumpForce;
-	[SerializeField]
-	float airJumpForce;[SerializeField]
-	float jumpHold;
-	[SerializeField]
-	float dashJumpForce;
+	[SerializeField] float jumpForce;
+	[SerializeField] float airJumpForce;
+	[SerializeField] float jumpHold;
+	[SerializeField] float dashJumpForce;
 	bool canJump;
 	bool jumpButtonHeld = false;
 	Rigidbody body;
 	private float halfScreen;
 	
 	[Header("References")]
-	[SerializeField]
-	LayerMask layer;
-	[SerializeField]
-	Camera cameraShake;
-	[SerializeField]
-	LevelManager procedural;
-	[SerializeField]
-	GameObject projectile;
-	[SerializeField]
-	GameObject bossTrigger;
+	[SerializeField] LayerMask layer;
+	[SerializeField] Camera cameraShake;
+	[SerializeField] LevelManager procedural;
+	[SerializeField] GameObject projectile;
+	[SerializeField] GameObject bossTrigger;
 
 	[Header("PowerUp")]
 	bool isStabbing = false;
 	bool hasDashShoot = false;
-	[SerializeField]
-	float dashPowerUpDuration;
+	[SerializeField] float dashPowerUpDuration;
 	
 	[Header("Other")]
-	[SerializeField]
-	float cheatSpeed;
+	[SerializeField] float cheatSpeed;
 	void Start()
 	{
 		body = GetComponent<Rigidbody>();
@@ -182,7 +168,6 @@ public class Player : MonoBehaviour
 			}
 		}
 	}
-	
 	
 	//RECURRING METHODS__________________________________________________________________
 	

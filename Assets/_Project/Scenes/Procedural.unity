@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5469,7 +5469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7763206737115200131, guid: 7c8156bf8d8405d47b048c36dab0bd89, type: 3}
       propertyPath: moveSpeedStart
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -7763206737115200131, guid: 7c8156bf8d8405d47b048c36dab0bd89, type: 3}
       propertyPath: dashPowerUpDuration
@@ -6157,6 +6157,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: E1Block
       objectReference: {fileID: 0}
+    - target: {fileID: 8204578322602116680, guid: 90340383555b76b47a58cb08df020411, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8204578322602116682, guid: 90340383555b76b47a58cb08df020411, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -6773,51 +6777,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3952519826814325533, guid: 01c11e9c5a7701f429ee7a40177b3fd8, type: 3}
   m_PrefabInstance: {fileID: 1950743370}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1329372912
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1329372913}
-  - component: {fileID: 1329372914}
-  m_Layer: 0
-  m_Name: Trigger
-  m_TagString: BlockCaller
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1329372913
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1329372912}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1978104901}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1329372914
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1329372912}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 10, z: 10}
-  m_Center: {x: 20, y: 2, z: 0}
 --- !u!1 &1330368588
 GameObject:
   m_ObjectHideFlags: 0
@@ -8978,6 +8937,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: M1Block
       objectReference: {fileID: 0}
+    - target: {fileID: 7885375852348421742, guid: ab545693687b4214290662d375949023, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8471536640579226389, guid: ab545693687b4214290662d375949023, type: 3}
       propertyPath: m_Layer
       value: 20
@@ -9608,11 +9571,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8416286778695907716, guid: f9edc45a9d87ff443b59431eeb134117, type: 3}
   m_PrefabInstance: {fileID: 2047356414}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1978104901 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8416286778695907718, guid: f9edc45a9d87ff443b59431eeb134117, type: 3}
-  m_PrefabInstance: {fileID: 2047356414}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1987616394
 GameObject:
   m_ObjectHideFlags: 0
@@ -9997,34 +9955,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 264025144594431808, guid: f9edc45a9d87ff443b59431eeb134117, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1130482634562591064, guid: f9edc45a9d87ff443b59431eeb134117, type: 3}
-      propertyPath: m_Layer
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3296684756807244179, guid: f9edc45a9d87ff443b59431eeb134117, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6840217708139590227, guid: f9edc45a9d87ff443b59431eeb134117, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7796331306567697663, guid: f9edc45a9d87ff443b59431eeb134117, type: 3}
-      propertyPath: m_Layer
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7796331306567697663, guid: f9edc45a9d87ff443b59431eeb134117, type: 3}
-      propertyPath: m_TagString
-      value: NotDashableEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 8108583700928500864, guid: f9edc45a9d87ff443b59431eeb134117, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8416286778695907716, guid: f9edc45a9d87ff443b59431eeb134117, type: 3}
       propertyPath: m_Name
       value: H1Block
