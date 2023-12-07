@@ -12,25 +12,24 @@ public class LevelManager : MonoBehaviour
     GameObject player;
     int currentBlock;
     int blocknumber;
-    bool bossfight = false;
 
     void Start()
     {
-        blocknumber = 0;
-        currentBlock = 0;
+        blocknumber = -1;
+        currentBlock = -1;
     }
 
     public void Rearrange()
     {
         int blockposition = (int)(player.transform.position.x / blockSize);
+        Debug.Log(currentBlock);
         while(blocknumber == currentBlock) 
         {
-            if(!bossfight) blocknumber = Random.Range(0,3);
-            else blocknumber = Random.Range(3,4);
+            if(!GameManager.manager.bossFight) blocknumber = Random.Range(0,3);
+            else blocknumber = Random.Range(3,Blocks.Length);
         }
         currentBlock = blocknumber;
         Blocks[currentBlock].transform.position = new Vector3((blockposition + 1) * blockSize, 0, 0);
-        Debug.Log(Blocks[currentBlock]);
         for(int i = 0; i < Blocks[currentBlock].transform.childCount; i++)
         {
             Blocks[currentBlock].transform.GetChild(i).gameObject.SetActive(true);

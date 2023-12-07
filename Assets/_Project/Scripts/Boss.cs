@@ -12,10 +12,11 @@ public class Boss : MonoBehaviour
     int heat = 0;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         health = maxHealth;
         gameObject.SetActive(false);
+        transform.position = new Vector3(player.gameObject.transform.position.x + 40, 20, 0);
     }
 
     // Update is called once per frame

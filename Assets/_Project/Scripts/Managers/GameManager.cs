@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 	public float freezeDuration;
 	[SerializeField]
 	Achievements data;
+	public bool bossFight = false;
 	void Awake()
 	{
 		data = new Achievements();
