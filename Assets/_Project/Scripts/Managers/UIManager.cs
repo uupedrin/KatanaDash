@@ -19,8 +19,8 @@ public class UIManager : MonoBehaviour
 	{
 		GameManager.manager.UiManager = this;
 		if(pauseMenu != null) pauseMenu.SetActive(false);
-        if (configMenu != null) configMenu.SetActive(false);
-    }
+		if (configMenu != null) configMenu.SetActive(false);
+	}
 	
 	public void SetCoins(int coins)
 	{
@@ -28,14 +28,15 @@ public class UIManager : MonoBehaviour
 	}
 	public void SetStatus(float metersRan)
 	{
+		if(metersText == null) return;
 		metersText.text = metersRan + " m";
 	}
 	public void ChangeScene(string scene)
 	{
 		SceneManager.LoadScene(scene);
 	}
-    public void SetConfigMenu()
-    {
+	public void SetConfigMenu()
+	{
 		if(configMenu.activeInHierarchy == false) 
 		{
 			configMenu.SetActive(true);
@@ -44,8 +45,8 @@ public class UIManager : MonoBehaviour
 		{
 			configMenu.SetActive(false);
 		}
-    }
-    public void PauseGame()
+	}
+	public void PauseGame()
 	{
 		if(isPaused) 
 		{
@@ -53,10 +54,10 @@ public class UIManager : MonoBehaviour
 		}
 		else 
 		{
-            Time.timeScale = 0f;
-            pauseMenu.SetActive(true);
-            isPaused = true;
-        }
+			Time.timeScale = 0f;
+			pauseMenu.SetActive(true);
+			isPaused = true;
+		}
 	}
 	public void ResumeGame()
 	{
@@ -66,20 +67,20 @@ public class UIManager : MonoBehaviour
 	}
 	public void EndGameScreen(float finalMeters, int coins)
 	{
-        Time.timeScale = 0f;
-        isPaused = true;
-        finalMetersText.text = finalMeters.ToString();
+		Time.timeScale = 0f;
+		isPaused = true;
+		finalMetersText.text = finalMeters + " m";
 		finalCoinText.text = coins.ToString();
 		endGameMenu.SetActive(true);		
 	}
-    public void ResetGame()
-    {
-        GameManager.manager.coins = 0;
-        GameManager.manager.metersRan = 0;
-        GameManager.manager.finalMeters = 0;
-        GameManager.manager.metersTimer = 0;
-    }
-    public void Quit()
+	public void ResetGame()
+	{
+		GameManager.manager.coins = 0;
+		GameManager.manager.metersRan = 0;
+		GameManager.manager.finalMeters = 0;
+		GameManager.manager.metersTimer = 0;
+	}
+	public void Quit()
 	{
 		Application.Quit();
 	}

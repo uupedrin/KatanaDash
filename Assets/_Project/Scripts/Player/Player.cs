@@ -45,13 +45,27 @@ public class Player : MonoBehaviour
 	
 	[Header("Other")]
 	[SerializeField] float cheatSpeed;
+	[SerializeField] Animator playerAnimator;
 	void Start()
 	{
+		playerAnimator = GetComponentInChildren<Animator>();
 		body = GetComponent<Rigidbody>();
 		halfScreen = Screen.width / 2f;
 		moveSpeed = moveSpeedStart;
 	}
 
+	void Update()
+	{
+		if(body.velocity.y <= -.5)
+		{
+			playerAnimator.SetBool("isFalling", true);
+		}
+		else if(body.velocity.y > -.5 || IsGrounded())
+		{
+			playerAnimator.SetBool("isFalling", false);
+		}
+	}
+	
 	void FixedUpdate()
 	{
 		if(GameManager.manager.UiManager.isPaused) return;
@@ -173,12 +187,17 @@ public class Player : MonoBehaviour
 	
 	void Jump()
 	{
-		if(IsGrounded()) body.AddForce(UnityEngine.Vector3.up * jumpForce);
+		if(IsGrounded())
+		{
+			body.AddForce(UnityEngine.Vector3.up * jumpForce);
+			playerAnimator.SetTrigger("StartJumping");
+		}
 		else if(canJump) body.AddForce(UnityEngine.Vector3.up * airJumpForce);
 	}
 
 	IEnumerator Dash()
 	{
+		playerAnimator.SetTrigger("PlayerDash");
 		if(hasDashShoot) projectile.SetActive(true);
 		canDash = false;
 		isDashing = true;
@@ -197,6 +216,7 @@ public class Player : MonoBehaviour
 	}
 	public void Kill(Collider collision)
 	{
+		playerAnimator.SetTrigger("PlayerHit");
 		StartCoroutine(GameManager.manager.Freeze());
 		GameManager.manager.AddPoints(2);
 		collision.gameObject.SetActive(false);

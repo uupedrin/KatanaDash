@@ -1,0 +1,416 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Cerise Bottom Mask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Cerise
+    m_Weight: 0
+  - m_Path: Cerise Rig
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL Lids
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL Lids/CONTROL Lids_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL ROOT Katana
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL ROOT Katana/CONTROL Katana Handle
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL ROOT Katana/CONTROL Katana Handle/Katana
+      Handle
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL ROOT Katana/CONTROL Katana Handle/Katana
+      Handle/Katana Blade Back
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL ROOT Katana/CONTROL Katana Handle/Katana
+      Handle/Katana Blade Back/Katana Blade Back_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL ROOT Katana/CONTROL Katana Handle/Katana
+      Handle/Katana Blade Front
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL ROOT Katana/CONTROL Katana Handle/Katana
+      Handle/Katana Blade Front/Katana Blade Front_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL ROOT Sheath
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL ROOT Sheath/CONTROL Sheath
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL ROOT Sheath/CONTROL Sheath/Sheath
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL ROOT Sheath/CONTROL Sheath/Sheath/Sheath_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL ROOT Sheath/CONTROL Sheath/Sheath
+      Katana Pos
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/CONTROL ROOT Sheath/CONTROL Sheath/Sheath
+      Katana Pos/Sheath Katana Pos_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/IK Leg.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/IK Leg.L/POLE Leg.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/IK Leg.L/POLE Leg.L/POLE Leg.L_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/IK Leg.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/IK Leg.R/POLE Leg.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/IK Leg.R/POLE Leg.R/POLE Leg.R_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/CONTROL
+      Fingers.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/CONTROL
+      Fingers.L/CONTROL Fingers.L_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/CONTROL
+      ITEM Hand.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/CONTROL
+      ITEM Hand.L/CONTROL ITEM Hand.L_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/Fingers
+      Weight.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/Fingers
+      Weight.L/Fingers Base.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/Fingers
+      Weight.L/Fingers Base.L/Fingers Mid.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/Fingers
+      Weight.L/Fingers Base.L/Fingers Mid.L/Fingers End.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/Fingers
+      Weight.L/Fingers Base.L/Fingers Mid.L/Fingers End.L/Fingers End.L_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/Pointer
+      Weight.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/Pointer
+      Weight.L/Pointer Base.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/Pointer
+      Weight.L/Pointer Base.L/Pointer Mid.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/Pointer
+      Weight.L/Pointer Base.L/Pointer Mid.L/Pointer End.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/Pointer
+      Weight.L/Pointer Base.L/Pointer Mid.L/Pointer End.L/Pointer End.L_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/Thumb
+      Base.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/Thumb
+      Base.L/Thumb End.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.L/Arm.L/Forearm.L/Hand.L/Thumb
+      Base.L/Thumb End.L/Thumb End.L_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/CONTROL
+      Fingers.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/CONTROL
+      Fingers.R/CONTROL Fingers.R_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/CONTROL
+      ITEM Hand.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/CONTROL
+      ITEM Hand.R/CONTROL ITEM Hand.R_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/Fingers
+      Weight.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/Fingers
+      Weight.R/Fingers Base.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/Fingers
+      Weight.R/Fingers Base.R/Fingers Mid.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/Fingers
+      Weight.R/Fingers Base.R/Fingers Mid.R/Fingers End.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/Fingers
+      Weight.R/Fingers Base.R/Fingers Mid.R/Fingers End.R/Fingers End.R_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/Pointer
+      Weight.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/Pointer
+      Weight.R/Pointer Base.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/Pointer
+      Weight.R/Pointer Base.R/Pointer Mid.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/Pointer
+      Weight.R/Pointer Base.R/Pointer Mid.R/Pointer End.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/Pointer
+      Weight.R/Pointer Base.R/Pointer Mid.R/Pointer End.R/Pointer End.R_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/Thumb
+      Base.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/Thumb
+      Base.R/Thumb End.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Clavicle.R/Arm.R/Forearm.R/Hand.R/Thumb
+      Base.R/Thumb End.R/Thumb End.R_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairBackBase.L
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairBackBase.L/HairBackEnd.L
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairBackBase.L/HairBackEnd.L/HairBackEnd.L_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairBackBase.R
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairBackBase.R/HairBackEnd.R
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairBackBase.R/HairBackEnd.R/HairBackEnd.R_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairFrontBase.L
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairFrontBase.L/HairFrontEnd.L
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairFrontBase.L/HairFrontEnd.L/HairFrontEnd.L_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairFrontBase.R
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairFrontBase.R/HairFrontEnd.R
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairFrontBase.R/HairFrontEnd.R/HairFrontEnd.R_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairMidBase.L
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairMidBase.L/HairMidEnd.L
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairMidBase.L/HairMidEnd.L/HairMidEnd.L_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairMidBase.R
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairMidBase.R/HairMidEnd.R
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/HairMidBase.R/HairMidEnd.R/HairMidEnd.R_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/Hat
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/Hat/Hat_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/Ponytail
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/Ponytail/Ponytail.001
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/Ponytail/Ponytail.001/Ponytail.002
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/Ponytail/Ponytail.001/Ponytail.002/Ponytail.003
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/Ponytail/Ponytail.001/Ponytail.002/Ponytail.003/Ponytail.004
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/Ponytail/Ponytail.001/Ponytail.002/Ponytail.003/Ponytail.004/Ponytail.005
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Chest/Traps/Neck/Head/Ponytail/Ponytail.001/Ponytail.002/Ponytail.003/Ponytail.004/Ponytail.005/Ponytail.005_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.L
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.L/Strip.001.L
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.L/Strip.001.L/Strip.002.L
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.L/Strip.001.L/Strip.002.L/Strip.003.L
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.L/Strip.001.L/Strip.002.L/Strip.003.L/Strip.004.L
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.L/Strip.001.L/Strip.002.L/Strip.003.L/Strip.004.L/Strip.005.L
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.L/Strip.001.L/Strip.002.L/Strip.003.L/Strip.004.L/Strip.005.L/Strip.006.L
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.L/Strip.001.L/Strip.002.L/Strip.003.L/Strip.004.L/Strip.005.L/Strip.006.L/Strip.006.L_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.R
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.R/Strip.001.R
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.R/Strip.001.R/Strip.002.R
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.R/Strip.001.R/Strip.002.R/Strip.003.R
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.R/Strip.001.R/Strip.002.R/Strip.003.R/Strip.004.R
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/Strip.R/Strip.001.R/Strip.002.R/Strip.003.R/Strip.004.R/Strip.004.R_end
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/WEIGHT Chest.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/WEIGHT Chest.L/WEIGHT Chest.L_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/WEIGHT Chest.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Belly/WEIGHT Chest.R/WEIGHT Chest.R_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/ITEM Sheath
+    m_Weight: 0
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/ITEM Sheath/ITEM Sheath_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Calf Lid.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Calf Lid.L/CONTROL
+      Calf Piston End.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Calf Lid.L/CONTROL
+      Calf Piston End.L/Calf Piston Body.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Calf Lid.L/CONTROL
+      Calf Piston End.L/Calf Piston Body.L/Calf Piston Body.L_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/CONTROL Calf
+      Piston Base.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/CONTROL Calf
+      Piston Base.L/Calf Piston Base.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/CONTROL Calf
+      Piston Base.L/Calf Piston Base.L/Calf Piston Base.L_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Foot.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Foot.L/Heel Base.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Foot.L/Heel Base.L/Heel
+      End.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Foot.L/Heel Base.L/Heel
+      End.L/Heel End.L_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Lower Thruster
+      Base.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Lower Thruster
+      Base.L/Lower Thruster Mid.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Lower Thruster
+      Base.L/Lower Thruster Mid.L/Lower Thruster End.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Lower Thruster
+      Base.L/Lower Thruster Mid.L/Lower Thruster End.L/Lower Thruster End.L_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Upper Thruster
+      Base.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Upper Thruster
+      Base.L/Upper Thruster Mid.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Upper Thruster
+      Base.L/Upper Thruster Mid.L/Upper Thruster End.L
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.L/Calf.L/Upper Thruster
+      Base.L/Upper Thruster Mid.L/Upper Thruster End.L/Upper Thruster End.L_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Calf Lid.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Calf Lid.R/CONTROL
+      Calf Piston End.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Calf Lid.R/CONTROL
+      Calf Piston End.R/Calf Piston Body.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Calf Lid.R/CONTROL
+      Calf Piston End.R/Calf Piston Body.R/Calf Piston Body.R_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/CONTROL Calf
+      Piston Base.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/CONTROL Calf
+      Piston Base.R/Calf Piston Base.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/CONTROL Calf
+      Piston Base.R/Calf Piston Base.R/Calf Piston Base.R_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Foot.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Foot.R/Heel Base.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Foot.R/Heel Base.R/Heel
+      End.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Foot.R/Heel Base.R/Heel
+      End.R/Heel End.R_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Lower Thruster
+      Base.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Lower Thruster
+      Base.R/Lower Thruster Mid.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Lower Thruster
+      Base.R/Lower Thruster Mid.R/Lower Thruster End.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Lower Thruster
+      Base.R/Lower Thruster Mid.R/Lower Thruster End.R/Lower Thruster End.R_end
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Upper Thruster
+      Base.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Upper Thruster
+      Base.R/Upper Thruster Mid.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Upper Thruster
+      Base.R/Upper Thruster Mid.R/Upper Thruster End.R
+    m_Weight: 1
+  - m_Path: Cerise Rig/ROOTMASTER/ROOTROLL/MASTER/Hips/Leg.R/Calf.R/Upper Thruster
+      Base.R/Upper Thruster Mid.R/Upper Thruster End.R/Upper Thruster End.R_end
+    m_Weight: 1
+  - m_Path: Katana
+    m_Weight: 0
+  - m_Path: Sheath
+    m_Weight: 0
