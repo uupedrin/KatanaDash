@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 	public float freezeDuration;
 	[SerializeField]
 	Achievements data;
+	public bool bossFight = false;
+
 	void Awake()
 	{
 		data = new Achievements();
@@ -46,24 +48,13 @@ public class GameManager : MonoBehaviour
 			UiManager.SetStatus(metersRan);
 		}
 	}
-	public void AddPoints(int enemyType)
+	public void AddPoints()
 	{
-		switch (enemyType)
-		{
-			case 1: // coins
-				coins += 1;
-				data.achievement[0] = true;
-				data.records[0]++;
-				SaveToJson();
-				UiManager.SetCoins(coins);
-				break;
-			case 2:
-				//score += 1000;
-				break;
-			case 3:
-				//score += 1500;
-				break;
-		}
+		coins += 1;
+		data.achievement[0] = true;
+		data.records[0]++;
+		SaveToJson();
+		UiManager.SetCoins(coins);
 	}
 	public void EndGame()
 	{

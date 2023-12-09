@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 	[SerializeField] LevelManager procedural;
 	[SerializeField] GameObject projectile;
 	[SerializeField] GameObject bossTrigger;
+	[SerializeField] GameObject boss;
 
 	[Header("PowerUp")]
 	bool isStabbing = false;
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
 	[Header("Other")]
 	[SerializeField] float cheatSpeed;
 	[SerializeField] Animator playerAnimator;
+
 	void Start()
 	{
 		playerAnimator = GetComponentInChildren<Animator>();
@@ -137,7 +139,7 @@ public class Player : MonoBehaviour
 			break;
 
 			case "Coin":
-			GameManager.manager.AddPoints(1);
+			GameManager.manager.AddPoints();
 			collision.gameObject.SetActive(false);
 			break;
 
@@ -159,6 +161,11 @@ public class Player : MonoBehaviour
 			case "StabPowerUp":
 			isStabbing = true;
 			collision.gameObject.SetActive(false);
+			break;
+
+			case "BossCaller":
+			GameManager.manager.bossFight = true;
+			//boss.SetActive(true);
 			break;
 		}
 	}
@@ -218,7 +225,6 @@ public class Player : MonoBehaviour
 	{
 		playerAnimator.SetTrigger("PlayerHit");
 		StartCoroutine(GameManager.manager.Freeze());
-		GameManager.manager.AddPoints(2);
 		collision.gameObject.SetActive(false);
 	}
 

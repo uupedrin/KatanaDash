@@ -12,7 +12,6 @@ public class LevelManager : MonoBehaviour
     GameObject player;
     int currentBlock;
     int blocknumber;
-    bool bossfight = false;
 
     void Start()
     {
@@ -25,7 +24,7 @@ public class LevelManager : MonoBehaviour
         int blockposition = (int)(player.transform.position.x / blockSize);
         while(blocknumber == currentBlock) 
         {
-            if(!bossfight) blocknumber = Random.Range(0,3);
+            if(!GameManager.manager.bossFight) blocknumber = Random.Range(0,3);
             else blocknumber = Random.Range(3,4);
         }
         currentBlock = blocknumber;
@@ -35,6 +34,5 @@ public class LevelManager : MonoBehaviour
         {
             Blocks[currentBlock].transform.GetChild(i).gameObject.SetActive(true);
         }
-        
     }
 }
