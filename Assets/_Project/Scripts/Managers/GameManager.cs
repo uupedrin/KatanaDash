@@ -7,19 +7,19 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    public int coins = 0;
-    [SerializeField]
-    public float metersRan;
-    [SerializeField]
-    public float metersTimer;
-    [SerializeField]
-    public float finalMeters;
+	[SerializeField]
+	public int coins = 0;
+	[SerializeField]
+	public float metersRan;
+	[SerializeField]
+	public float metersTimer;
+	[SerializeField]
+	public float finalMeters;
 	public static GameManager manager;
 	public UIManager UiManager;
 	public float freezeDuration;
 	[SerializeField]
-	Achievements data;
+	public Achievements data;
 	void Awake()
 	{
 		data = new Achievements();
@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour
 		{
 			Destroy(this.gameObject);
 		}
-		SaveToJson();
 		LoadFromJson();
 		DontDestroyOnLoad(gameObject);
 	}
@@ -40,8 +39,8 @@ public class GameManager : MonoBehaviour
 	{
 		metersTimer += Time.deltaTime;
 		metersRan = 2.08f * metersTimer;
-		metersRan = (float)Math.Round(metersRan,1);
-		if(finalMeters == 0)
+		metersRan = (float)Math.Round(metersRan, 1);
+		if (finalMeters == 0)
 		{
 			UiManager.SetStatus(metersRan);
 		}
@@ -77,25 +76,29 @@ public class GameManager : MonoBehaviour
 	}
 	public void HighScore()
 	{
-		if(!File.Exists("highscore.json") || Convert.ToInt32(File.ReadAllText("highscore.json")) < metersRan) File.WriteAllText("highscore.json", metersRan.ToString());
+		if (!File.Exists("highscore.json") || Convert.ToInt32(File.ReadAllText("highscore.json")) < metersRan) File.WriteAllText("highscore.json", metersRan.ToString());
 	}
 
-	public void NewAchievement(int achievementID)
+	public void SetAchievement(int achievementID)
 	{
 		data.achievement[achievementID] = true;
+		SaveToJson();
 	}
-
+	[ContextMenu("Save")]
 	public void SaveToJson()
 	{
 		string json = JsonUtility.ToJson(data, true);
-		File.WriteAllText(Application.persistentDataPath + "/AchievementsDataFile.json", json);
-	}
-	public void LoadFromJson()
+        Debug.Log(json);
+        File.WriteAllText(Application.persistentDataPath + "/AchievementsDataFile.json", json);
+    }
+    [ContextMenu("Load")]
+    public void LoadFromJson()
 	{
 		string json = "";
 		if(File.Exists(Application.persistentDataPath + "/AchievementsDataFile.json"))
 		{
 			json = File.ReadAllText(Application.persistentDataPath + "/AchievementsDataFile.json");
+			Debug.Log(json);
 		}
 		data = JsonUtility.FromJson<Achievements>(json);
 	}
