@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
 	public Text finalCoinText;
 	public GameObject pauseMenu;
 	public GameObject configMenu;
+	public GameObject achivmentsMenu;
+	public GameObject creditsMenu;
 	public GameObject endGameMenu;
 	public bool isPaused;
 	private void Start()
@@ -46,7 +48,29 @@ public class UIManager : MonoBehaviour
 			configMenu.SetActive(false);
 		}
 	}
-	public void PauseGame()
+    public void SetAchivmentsMenu()
+    {
+        if (achivmentsMenu.activeInHierarchy == false)
+        {
+            achivmentsMenu.SetActive(true);
+        }
+        else
+        {
+            achivmentsMenu.SetActive(false);
+        }
+    }
+	public void SetCreditsMenu() 
+	{
+        if (creditsMenu.activeInHierarchy == false)
+        {
+            creditsMenu.SetActive(true);
+        }
+        else
+        {
+            creditsMenu.SetActive(false);
+        }
+    }
+    public void PauseGame()
 	{
 		if(isPaused) 
 		{
