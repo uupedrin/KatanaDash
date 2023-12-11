@@ -5,8 +5,6 @@ using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 
-//Requires PlayerTouchHandler
-//[RequireComponent(typeof(PlayerTouchHandler))]
 public class Player : MonoBehaviour
 {
 	[Header("Movement")]
@@ -26,6 +24,7 @@ public class Player : MonoBehaviour
 	[SerializeField] float airJumpForce;
 	[SerializeField] float jumpHold;
 	[SerializeField] float dashJumpForce;
+	bool leftGround = false;
 	bool canJump;
 	bool jumpButtonHeld = false;
 	Rigidbody body;
@@ -56,13 +55,14 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
+		Debug.Log(leftGround);
 		if(body.velocity.y <= -.5)
 		{
 			playerAnimator.SetBool("isFalling", true);
 		}
-		else if(body.velocity.y > -.5 || IsGrounded())
+		else if(IsGrounded())
 		{
-			playerAnimator.SetBool("isFalling", false);
+			if(!leftGround)	playerAnimator.SetBool("isFalling", false);
 		}
 	}
 	
@@ -139,6 +139,7 @@ public class Player : MonoBehaviour
 			case "Coin":
 			GameManager.manager.AddPoints(1);
 			collision.gameObject.SetActive(false);
+			GameManager.manager.SetAchievement(0);
 			break;
 
 			case "TutorialHole":
@@ -191,6 +192,8 @@ public class Player : MonoBehaviour
 		{
 			body.AddForce(UnityEngine.Vector3.up * jumpForce);
 			playerAnimator.SetTrigger("StartJumping");
+			leftGround = true;
+			Invoke("leftGroundFalse", .3f);
 		}
 		else if(canJump) body.AddForce(UnityEngine.Vector3.up * airJumpForce);
 	}
@@ -278,4 +281,9 @@ public class Player : MonoBehaviour
 		isDashing = false;
 	}
 
+	void leftGroundFalse()
+	{
+		leftGround = false;
+		playerAnimator.SetBool("isFalling", true);
+	}
 }

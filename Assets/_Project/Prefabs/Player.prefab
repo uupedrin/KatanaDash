@@ -146,9 +146,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5657339
-  m_Height: 2.1010442
+  m_Height: 3.130783
   m_Direction: 1
-  m_Center: {x: 1.1489208e-17, y: 0.024650097, z: 0.016433477}
+  m_Center: {x: 0, y: 0.53951955, z: 0.016433477}
 --- !u!114 &-7763206737115200131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +179,7 @@ MonoBehaviour:
   bossTrigger: {fileID: 0}
   dashPowerUpDuration: 0
   cheatSpeed: 0
+  playerAnimator: {fileID: 0}
 --- !u!1001 &2747919645225975999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -192,15 +193,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb9cbe09628ea1e48bd23e5b61ae6e2d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb9cbe09628ea1e48bd23e5b61ae6e2d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb9cbe09628ea1e48bd23e5b61ae6e2d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb9cbe09628ea1e48bd23e5b61ae6e2d, type: 3}
       propertyPath: m_LocalPosition.x
