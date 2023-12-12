@@ -99,21 +99,29 @@ public class Player : MonoBehaviour
 			case "Enemy":
 			if(isDashing || isStabbing) 
 			{
+				Instantiate(AudioManager.manager.katanaHit, transform.position, transform.rotation);
+				Instantiate(AudioManager.manager.explosion, transform.position, transform.rotation);
 				Kill(collision);
 				if(!isDashing) isStabbing = false;
 			}
-			else Die();
+			else 
+			{
+                Instantiate(AudioManager.manager.damage, transform.position, transform.rotation);
+				Die();
+            }
 			break;
 
 			case "NotDashableEnemy":
-			Die();
+            Instantiate(AudioManager.manager.damage, transform.position, transform.rotation);
+            Die();
 			break;
 
 			case "TutorialEnemy":
 			if(isDashing || isStabbing) 
 			{
 				Kill(collision);
-				if(!isDashing) isStabbing = false;
+                Instantiate(AudioManager.manager.katanaHit, transform.position, transform.rotation);
+                if (!isDashing) isStabbing = false;
 			}
 			else
 			{
@@ -137,6 +145,7 @@ public class Player : MonoBehaviour
 			break;
 
 			case "Coin":
+			Instantiate(AudioManager.manager.coin, transform.position, transform.rotation);
 			GameManager.manager.AddPoints(1);
 			collision.gameObject.SetActive(false);
 			GameManager.manager.SetAchievement(0);
@@ -190,6 +199,7 @@ public class Player : MonoBehaviour
 	{
 		if(IsGrounded())
 		{
+			Instantiate(AudioManager.manager.jump, transform.position, transform.rotation);
 			body.AddForce(UnityEngine.Vector3.up * jumpForce);
 			playerAnimator.SetTrigger("StartJumping");
 			leftGround = true;
@@ -204,6 +214,7 @@ public class Player : MonoBehaviour
 		if(hasDashShoot) projectile.SetActive(true);
 		canDash = false;
 		isDashing = true;
+		Instantiate(AudioManager.manager.dash, transform.position, transform.rotation);
 		body.constraints = RigidbodyConstraints.FreezeAll;
 		moveSpeed = dashSpeed;
 		yield return new WaitForSeconds(dashDuration);

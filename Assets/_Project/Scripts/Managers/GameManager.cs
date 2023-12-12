@@ -20,7 +20,10 @@ public class GameManager : MonoBehaviour
 	public float freezeDuration;
 	[SerializeField]
 	public Achievements data;
-	void Awake()
+    public float saveMasterSlider;
+    public float saveMusicSlider;
+    public float saveSfxSlider;
+    void Awake()
 	{
 		data = new Achievements();
 		HighScore();
@@ -88,7 +91,6 @@ public class GameManager : MonoBehaviour
 	public void SaveToJson()
 	{
 		string json = JsonUtility.ToJson(data, true);
-        Debug.Log(json);
         File.WriteAllText(Application.persistentDataPath + "/AchievementsDataFile.json", json);
     }
     [ContextMenu("Load")]
@@ -98,7 +100,6 @@ public class GameManager : MonoBehaviour
 		if(File.Exists(Application.persistentDataPath + "/AchievementsDataFile.json"))
 		{
 			json = File.ReadAllText(Application.persistentDataPath + "/AchievementsDataFile.json");
-			Debug.Log(json);
 		}
 		data = JsonUtility.FromJson<Achievements>(json);
 	}

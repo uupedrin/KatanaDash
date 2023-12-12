@@ -8,13 +8,18 @@ using UnityEngine.UI;
 public class AudioManager : MonoBehaviour
 {
 	[SerializeField] private AudioMixer mixer;
-	public Slider masterSlider;
+    public static AudioManager manager;
+    public Slider masterSlider;
 	public Slider musicSlider;
 	public Slider sfxSlider;
-	
-	public static AudioManager manager;
-	
-	void Awake()
+	public GameObject buttonClick;
+    public GameObject coin;
+    public GameObject damage;
+	public GameObject dash;
+	public GameObject explosion;
+	public GameObject jump;
+	public GameObject katanaHit;
+	void Start()
 	{
 		if(manager == null)
 		{
@@ -24,17 +29,27 @@ public class AudioManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
+		masterSlider.value = GameManager.manager.saveMasterSlider;
+		musicSlider.value = GameManager.manager.saveMusicSlider;
+		sfxSlider.value = GameManager.manager.saveSfxSlider;
 	}
 	public void ChangeMasterVol()
 	{
 		mixer.SetFloat("MasterVolume", (masterSlider.value));
-	}
+        GameManager.manager.saveMasterSlider = masterSlider.value;
+    }
 	public void ChangeMusicVol()
 	{
 		mixer.SetFloat("MusicVolume",(musicSlider.value));
+        GameManager.manager.saveMusicSlider = musicSlider.value;
 	}
 	public void ChangeSFXVol()
 	{
 		mixer.SetFloat("SfxVolume", (sfxSlider.value));
+        GameManager.manager.saveSfxSlider = sfxSlider.value;
+	}
+	public void PlayClick() 
+	{
+		Instantiate(buttonClick);
 	}
 }
