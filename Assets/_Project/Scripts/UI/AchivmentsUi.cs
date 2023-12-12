@@ -12,7 +12,6 @@ public class AchivmentsUi : MonoBehaviour
         GameManager.manager.LoadFromJson();
         if (GameManager.manager.data.achievement[0] == true) 
         {
-            Debug.Log("oi");
             coin.color = Color.yellow;
         }
     }
