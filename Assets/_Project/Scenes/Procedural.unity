@@ -8788,7 +8788,7 @@ MonoBehaviour:
   damage: {fileID: 7181222027513143635, guid: 2c2611974868dfe41b6e35c23521d55f, type: 3}
   dash: {fileID: 3795066659147827771, guid: 1db73d1b62c3d6f4794c9104f37a4439, type: 3}
   explosion: {fileID: 4752391884212578912, guid: ffef2ece048779749bc9685fbaaa10b5, type: 3}
-  jump: {fileID: 2122083441295962265, guid: 26c00615d8e55b2408142a8b45f61f72, type: 3}
+  jumpPwP: {fileID: 2122083441295962265, guid: 26c00615d8e55b2408142a8b45f61f72, type: 3}
   katanaHit: {fileID: 9195176240243856532, guid: eab4759e65705c647819a8a33ef31e21, type: 3}
 --- !u!4 &1675900899
 Transform:

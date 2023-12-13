@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
     public GameObject damage;
 	public GameObject dash;
 	public GameObject explosion;
-	public GameObject jump;
+	public GameObject jumpPwP;
 	public GameObject katanaHit;
 	void Start()
 	{

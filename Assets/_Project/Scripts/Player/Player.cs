@@ -140,6 +140,7 @@ public class Player : MonoBehaviour
 			{
 				StopAllCoroutines();
 				StopDash();
+				Instantiate(AudioManager.manager.jumpPwP, transform.position, transform.rotation);
 				body.AddForce(UnityEngine.Vector3.up * dashJumpForce);
 			}
 			break;
@@ -199,7 +200,6 @@ public class Player : MonoBehaviour
 	{
 		if(IsGrounded())
 		{
-			Instantiate(AudioManager.manager.jump, transform.position, transform.rotation);
 			body.AddForce(UnityEngine.Vector3.up * jumpForce);
 			playerAnimator.SetTrigger("StartJumping");
 			leftGround = true;
