@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 	public float freezeDuration;
 	[SerializeField]
 	public Achievements data;
+	public bool bossFight = false;
+
 	void Awake()
 	{
 		data = new Achievements();
@@ -67,7 +69,9 @@ public class GameManager : MonoBehaviour
 	public void EndGame()
 	{
 		finalMeters = metersRan;
+		bossFight = false;
 	}
+
 	public IEnumerator Freeze()
 	{
 		Time.timeScale = 0;

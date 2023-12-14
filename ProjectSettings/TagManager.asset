@@ -16,6 +16,7 @@ TagManager:
   - BlockCaller
   - DashJump
   - StabPowerUp
+  - BossTrigger
   layers:
   - Default
   - TransparentFX
