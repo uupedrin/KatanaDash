@@ -22,12 +22,11 @@ public class GameManager : MonoBehaviour
 	public float freezeDuration;
 	[SerializeField]
 	public Achievements data;
-    public float saveMasterSlider;
-    public float saveMusicSlider;
-    public float saveSfxSlider;
-    void Awake()
+	public float saveMasterSlider;
+	public float saveMusicSlider;
+	public float saveSfxSlider;
+	void Awake()
 	{
-		data = new Achievements();
 		if (manager == null)
 		{
 			manager = this;
@@ -36,6 +35,7 @@ public class GameManager : MonoBehaviour
 		{
 			Destroy(this.gameObject);
 		}
+		data = new Achievements();
 		LoadFromJson();
 		DontDestroyOnLoad(gameObject);
 	}
@@ -52,18 +52,18 @@ public class GameManager : MonoBehaviour
 		if (coins == 20) 
 		{
 			SetAchievement(1);
-            UiManager.PopUp(1);
-        }
+			UiManager.PopUp(1);
+		}
 		if(coins == 100) 
 		{
 			SetAchievement(2);
-            UiManager.PopUp(2);
-        }
+			UiManager.PopUp(2);
+		}
 		if (metersRan == 1000) 
 		{
 			SetAchievement(4);
-            UiManager.PopUp(4);
-        }
+			UiManager.PopUp(4);
+		}
 	}
 	public void AddPoints(int enemyType)
 	{
@@ -102,16 +102,21 @@ public class GameManager : MonoBehaviour
 	public void SaveToJson()
 	{
 		string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(Application.persistentDataPath + "/AchievementsFile.json", json);
-    }
-    public void LoadFromJson()
+		File.WriteAllText(Application.persistentDataPath + "/AchievementsFile.json", json);
+	}
+	public void LoadFromJson()
 	{
 		string json = "";
 		if(File.Exists(Application.persistentDataPath + "/AchievementsFile.json"))
 		{
 			json = File.ReadAllText(Application.persistentDataPath + "/AchievementsFile.json");
+			data = JsonUtility.FromJson<Achievements>(json);
 		}
-		data = JsonUtility.FromJson<Achievements>(json);
+		else
+		{
+			SaveToJson();
+			LoadFromJson();
+		}
 	}
 }
 /*
