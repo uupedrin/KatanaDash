@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 	}
 	public void HighScore()
 	{
-		if (!File.Exists("highscore.json") || Convert.ToInt32(File.ReadAllText("highscore.json")) < metersRan) File.WriteAllText("highscore.json", metersRan.ToString());
+		//if (!File.Exists("highscore.json") || Convert.ToInt32(File.ReadAllText("highscore.json")) < metersRan) File.WriteAllText("highscore.json", metersRan.ToString());
 	}
 
 	public void SetAchievement(int achievementID)
