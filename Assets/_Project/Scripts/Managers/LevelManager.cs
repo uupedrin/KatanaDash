@@ -30,7 +30,6 @@ public class LevelManager : MonoBehaviour
         }
         currentBlock = blocknumber;
         Blocks[currentBlock].transform.position = new Vector3((blockposition + 1) * blockSize, 0, 0);
-        Debug.Log(Blocks[currentBlock]);
         for(int i = 0; i < Blocks[currentBlock].transform.childCount; i++)
         {
             Blocks[currentBlock].transform.GetChild(i).gameObject.SetActive(true);
