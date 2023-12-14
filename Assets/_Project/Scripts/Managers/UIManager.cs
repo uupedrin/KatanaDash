@@ -16,13 +16,23 @@ public class UIManager : MonoBehaviour
 	public GameObject achivmentsMenu;
 	public GameObject creditsMenu;
 	public GameObject endGameMenu;
+	public GameObject exitMenu;
 	public bool isPaused;
-	private void Start()
+    bool[] shown = new bool[7];
+    public Image[] images = new Image[7];
+    private void Start()
 	{
 		GameManager.manager.UiManager = this;
 		if(pauseMenu != null) pauseMenu.SetActive(false);
 		if (configMenu != null) configMenu.SetActive(false);
-	}
+        for (int i = 0; i < shown.Length; i++)
+        {
+            if (GameManager.manager.data.achievement[i] == true)
+            {
+                shown[i] = true;
+            }
+        }
+    }
 	
 	public void SetCoins(int coins)
 	{
@@ -70,6 +80,17 @@ public class UIManager : MonoBehaviour
             creditsMenu.SetActive(false);
         }
     }
+    public void SetExitMenu()
+    {
+        if (exitMenu.activeInHierarchy == false)
+        {
+            exitMenu.SetActive(true);
+        }
+        else
+        {
+            exitMenu.SetActive(false);
+        }
+    }
     public void PauseGame()
 	{
 		if(isPaused) 
@@ -108,4 +129,18 @@ public class UIManager : MonoBehaviour
 	{
 		Application.Quit();
 	}
+    public void PopUp(int i)
+    {
+        if (!shown[i])
+        {
+            images[i].gameObject.SetActive(true);
+			shown[i] = true;
+        }
+        StartCoroutine(RemovePopUp(i));
+    }
+    IEnumerator RemovePopUp(int i)
+    {
+        yield return new WaitForSeconds(3);
+        images[i].gameObject.SetActive(false);
+    }
 }

@@ -51,11 +51,11 @@ public class Player : MonoBehaviour
 		body = GetComponent<Rigidbody>();
 		halfScreen = Screen.width / 2f;
 		moveSpeed = moveSpeedStart;
+		GameManager.manager.UiManager.ResetGame();
 	}
 
 	void Update()
 	{
-		Debug.Log(leftGround);
 		if(body.velocity.y <= -.5)
 		{
 			playerAnimator.SetBool("isFalling", true);
@@ -150,7 +150,8 @@ public class Player : MonoBehaviour
 			GameManager.manager.AddPoints(1);
 			collision.gameObject.SetActive(false);
 			GameManager.manager.SetAchievement(0);
-			break;
+            GameManager.manager.UiManager.PopUp(0);
+            break;
 
 			case "TutorialHole":
 			Recoil();
@@ -248,9 +249,10 @@ public class Player : MonoBehaviour
 	
 	void Die()
 	{
-		GameManager.manager.EndGame();
+        GameManager.manager.SetAchievement(3);
+		GameManager.manager.UiManager.PopUp(3);
+        GameManager.manager.EndGame();
 		GameManager.manager.UiManager.EndGameScreen(GameManager.manager.finalMeters, GameManager.manager.coins);
-		GameManager.manager.HighScore();
 	}
 
 	bool IsGrounded()

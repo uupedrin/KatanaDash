@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
 	public GameObject explosion;
 	public GameObject jumpPwP;
 	public GameObject katanaHit;
+	public GameObject achievment;
 	void Start()
 	{
 		if(manager == null)
