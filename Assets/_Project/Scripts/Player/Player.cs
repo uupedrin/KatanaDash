@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
 	[SerializeField] LevelManager procedural;
 	[SerializeField] GameObject projectile;
 	[SerializeField] GameObject bossTrigger;
+	[SerializeField] GameObject boss;
 
 	[Header("PowerUp")]
 	bool isStabbing = false;
@@ -171,6 +172,11 @@ public class Player : MonoBehaviour
 			case "StabPowerUp":
 			isStabbing = true;
 			collision.gameObject.SetActive(false);
+			break;
+
+			case "BossCaller":
+			GameManager.manager.bossFight = true;
+			//boss.SetActive(true);
 			break;
 		}
 	}
