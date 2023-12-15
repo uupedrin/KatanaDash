@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     GameObject[] Blocks;
     [SerializeField]
     GameObject player;
+    int numberOFBlocks;
     int currentBlock;
     int blocknumber;
     bool bossfight = false;
@@ -18,6 +19,7 @@ public class LevelManager : MonoBehaviour
     {
         blocknumber = 0;
         currentBlock = 0;
+        numberOFBlocks = Blocks.Length;
     }
 
     public void Rearrange()
@@ -25,7 +27,7 @@ public class LevelManager : MonoBehaviour
         int blockposition = (int)(player.transform.position.x / blockSize);
         while(blocknumber == currentBlock) 
         {
-            if(!bossfight) blocknumber = Random.Range(0,3);
+            if(!bossfight) blocknumber = Random.Range(0, numberOFBlocks);
             else blocknumber = Random.Range(3,4);
         }
         currentBlock = blocknumber;
