@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: -4784775587649634472, guid: b53879bea60863b4c825393a430b42e2, type: 3}
+    - target: {fileID: -5754084199372789682, guid: 1bf7e6ca1f5dbff47bfd93d413f38a55, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 9179915568896119231, guid: ef4fe3ca0c57b50489688b989aefab3e, type: 3}
     - target: {fileID: 919132149155446097, guid: 1bf7e6ca1f5dbff47bfd93d413f38a55, type: 3}
       propertyPath: m_Name
       value: StemarollerSpikes Variant

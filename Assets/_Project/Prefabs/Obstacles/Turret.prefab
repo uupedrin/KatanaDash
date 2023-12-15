@@ -71,6 +71,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a941150d0a95ebf428a9b2d8547ce41d, type: 2}
+    - target: {fileID: -5754084199372789682, guid: b53879bea60863b4c825393a430b42e2, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 2165579551946672802, guid: e7870d8a3f39da94ca3cd25ca6e94dc3, type: 3}
     - target: {fileID: 919132149155446097, guid: b53879bea60863b4c825393a430b42e2, type: 3}
       propertyPath: m_Name
       value: Turret
