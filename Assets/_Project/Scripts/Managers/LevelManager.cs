@@ -10,32 +10,33 @@ public class LevelManager : MonoBehaviour
     GameObject[] Blocks;
     [SerializeField]
     GameObject player;
-    int numberOFBlocks;
+    int numberOfBlocks;
     int currentBlock;
-    int blocknumber;
-    bool bossfight = false;
+    int blockNumber;
+    int previousBlock;
 
     void Start()
     {
-        blocknumber = 0;
+        blockNumber = 0;
         currentBlock = 0;
-        numberOFBlocks = Blocks.Length;
+        previousBlock = 0;
+        numberOfBlocks = Blocks.Length;
     }
 
     public void Rearrange()
     {
         int blockposition = (int)(player.transform.position.x / blockSize);
-        while(blocknumber == currentBlock) 
+        while(blockNumber == currentBlock || blockNumber == previousBlock) 
         {
-            if(!bossfight) blocknumber = Random.Range(0, numberOFBlocks);
-            else blocknumber = Random.Range(3,4);
+            if(!GameManager.manager.bossFight) blockNumber = Random.Range(0, numberOfBlocks - 3);
+            else blockNumber = Random.Range(numberOfBlocks - 3, numberOfBlocks);
         }
-        currentBlock = blocknumber;
-        Blocks[currentBlock].transform.position = new Vector3((blockposition + 1) * blockSize, 0, 0);
+        previousBlock = currentBlock;
+        currentBlock = blockNumber;
+        Blocks[currentBlock].transform.position = new Vector3((blockposition + 2) * blockSize, 0, 0);
         for(int i = 0; i < Blocks[currentBlock].transform.childCount; i++)
         {
             Blocks[currentBlock].transform.GetChild(i).gameObject.SetActive(true);
         }
-        
     }
 }

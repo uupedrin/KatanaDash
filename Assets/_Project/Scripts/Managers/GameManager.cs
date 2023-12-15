@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 	public float saveMasterSlider;
 	public float saveMusicSlider;
 	public float saveSfxSlider;
+	public bool bossFight;
 	void Awake()
 	{
 		if (manager == null)
