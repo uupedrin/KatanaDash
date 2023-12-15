@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
@@ -16,13 +18,14 @@ public class Boss : MonoBehaviour
     float nextAttack;
     [SerializeField] float attack1CD;
     [SerializeField] GameObject gun;
+    [SerializeField] float acceleration;
 
     void OnEnable()
     {
         waiting = true;
         health = maxHealth;
         nextAttack = Time.time + cooldown;
-        transform.position = new Vector3(player.transform.position.x + 50, 0, 0);
+        transform.position = new Vector3(player.transform.position.x - (player.transform.position.x % 40) + 140, 0, 0);
     }
 
     void Update()
@@ -30,7 +33,7 @@ public class Boss : MonoBehaviour
         if(waiting & transform.position.x - player.transform.position.x <= 10) waiting = false;
         else if(!waiting) 
         {
-            if(heat < 3) transform.position = new Vector3(player.transform.position.x + 10, 0, 0);
+            if(heat < 1) transform.position += player.moveSpeed * Time.deltaTime * Vector3.right;
             else
             {
                 StartCoroutine(FindPlayer());
@@ -56,13 +59,18 @@ public class Boss : MonoBehaviour
     {   
         if(collision == player.gameObject)
         {
-            health--;
-            heat = 0;
-            if(health <= 0)
+            if(player.isDashing)
             {
-                health = maxHealth;
-                gameObject.SetActive(false);
+                health--;
+                heat = 0;
+                if(health <= 0)
+                {
+                    health = maxHealth;
+                    gameObject.SetActive(false);
+                }
+                StartCoroutine(Flinch());
             }
+            else player.Die();
         }
     }
 
@@ -100,7 +108,25 @@ public class Boss : MonoBehaviour
 
     IEnumerator FindPlayer()
 	{
-		transform.position -= new Vector3(-player.moveSpeed, 0.1f, 0);
-		yield return new WaitUntil(() => transform.position.y == player.transform.position.y);
+		transform.position += player.moveSpeed * Time.deltaTime * Vector3.right;
+        if(transform.position.y >= player.transform.position.y) transform.position -= new Vector3(0, 0.1f, 0);
+        else transform.position += new Vector3(0, 0.1f, 0);
+		yield return new WaitUntil(() => transform.position.y <= player.transform.position.y + 0.5f && transform.position.y >= player.transform.position.y - 0.5f);
+        transform.position = new Vector3(transform.position.x, player.transform.position.y, transform.position.z);
+        StartCoroutine(Charge());
+        StopCoroutine(FindPlayer());
+	}
+
+    IEnumerator Charge()
+	{
+		yield return new WaitUntil(() => transform.position.x <= player.transform.position.x);
+	}
+
+    IEnumerator Flinch()
+	{
+		transform.position = new Vector3(player.transform.position.x + 10, transform.position.y, 0);
+        transform.position += 0.5f * Time.deltaTime * Vector3.right;
+		yield return new WaitUntil(() => transform.position.x <= player.transform.position.x - 100);
+        transform.position = new Vector3(player.transform.position.x + 10, 0, 0);
 	}
 }

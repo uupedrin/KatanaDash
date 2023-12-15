@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 	[SerializeField] float dashDuration;
 	[SerializeField] float dashCooldown;
 	float nextDash = 0;
-	bool isDashing;
+	public bool isDashing;
 	bool canDash;
 
 	[Header("Jump")]
@@ -242,7 +242,7 @@ public class Player : MonoBehaviour
 		Invoke("NormalMoveSpeed", 2f);
 	}
 	
-	void Die()
+	public void Die()
 	{
 		GameManager.manager.EndGame();
 		GameManager.manager.UiManager.EndGameScreen(GameManager.manager.finalMeters, GameManager.manager.coins);
