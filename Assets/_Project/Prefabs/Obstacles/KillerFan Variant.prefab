@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 84cb8087a834b6542afc09b609bdf15b, type: 2}
     - target: {fileID: 919132149155446097, guid: 1b34614ff8a47084981eb058fb65aa04, type: 3}
       propertyPath: m_Name
-      value: KillerFan
+      value: KillerFan Variant
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1b34614ff8a47084981eb058fb65aa04, type: 3}
       propertyPath: m_TagString
@@ -95,3 +95,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.09, y: 0.53, z: 2.14}
   m_Center: {x: 0, y: 1.5956559, z: 0.0027763844}
+--- !u!95 &2148218789714921991
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7267841328593591498}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bcb2a41231e192c4a9fd974d752d2108, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
