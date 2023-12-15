@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 311f68ce8ec349843b14004c7bdb7648, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 311f68ce8ec349843b14004c7bdb7648, type: 3}
       propertyPath: m_LocalScale.y
@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 311f68ce8ec349843b14004c7bdb7648, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 311f68ce8ec349843b14004c7bdb7648, type: 3}
       propertyPath: m_LocalPosition.x
@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6424d5f626c192341b4b8ba1d38cc359, type: 2}
     - target: {fileID: 919132149155446097, guid: 311f68ce8ec349843b14004c7bdb7648, type: 3}
       propertyPath: m_Name
-      value: PlataformSuport  (1)
+      value: PlataformSuport Variant
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 311f68ce8ec349843b14004c7bdb7648, type: 3}
       propertyPath: m_Layer
