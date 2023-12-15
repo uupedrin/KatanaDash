@@ -71,6 +71,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: -4784775587649634472, guid: b53879bea60863b4c825393a430b42e2, type: 3}
+    - target: {fileID: -5754084199372789682, guid: ac888ca29a987ba4a9e64ad5dc7968f4, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -2240007122429933486, guid: 24cb2fdcd64166144a00f79a4ab24aa8, type: 3}
     - target: {fileID: 919132149155446097, guid: ac888ca29a987ba4a9e64ad5dc7968f4, type: 3}
       propertyPath: m_Name
       value: SawBlade
