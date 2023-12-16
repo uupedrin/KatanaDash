@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
 	[Header("Other")]
 	[SerializeField] float cheatSpeed;
 	[SerializeField] Animator playerAnimator;
+	[SerializeField] int powerUpOdds;
+
 	void Start()
 	{
 		playerAnimator = GetComponentInChildren<Animator>();
@@ -103,6 +105,7 @@ public class Player : MonoBehaviour
 				Instantiate(AudioManager.manager.katanaHit, transform.position, transform.rotation);
 				Instantiate(AudioManager.manager.explosion, transform.position, transform.rotation);
 				Kill(collision);
+				DropPowerUp();
 				if(!isDashing) isStabbing = false;
 			}
 			else 
@@ -162,17 +165,6 @@ public class Player : MonoBehaviour
 
 			case "BlockCaller":
 			procedural.Rearrange();
-			break;
-
-			case "DashPowerUp":
-			hasDashShoot = true;
-			Invoke("DashPowerUpOver", dashPowerUpDuration);
-			collision.gameObject.SetActive(false);
-			break;
-
-			case "StabPowerUp":
-			isStabbing = true;
-			collision.gameObject.SetActive(false);
 			break;
 
 			case "BossCaller":
@@ -281,6 +273,26 @@ public class Player : MonoBehaviour
 		moveSpeed = moveSpeedStart;
 		body.constraints = RigidbodyConstraints.FreezeRotation;
 		body.detectCollisions = true;
+	}
+
+	void DropPowerUp()
+	{
+		switch(UnityEngine.Random.Range(0, powerUpOdds))
+		{
+			case 0:
+			isStabbing = true;
+			Instantiate(AudioManager.manager.damage, transform.position, transform.rotation);
+			break;
+
+			case 1:
+			hasDashShoot = true;
+			Invoke("DashPowerUpOver", dashPowerUpDuration);
+			Instantiate(AudioManager.manager.damage, transform.position, transform.rotation);
+			break;
+
+			default:
+			break;
+		}
 	}
 	
 	//INVOKABLE METHODS__________________________________________________________________
