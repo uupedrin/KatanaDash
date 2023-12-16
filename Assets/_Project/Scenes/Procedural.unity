@@ -5262,7 +5262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7763206737115200131, guid: 7c8156bf8d8405d47b048c36dab0bd89, type: 3}
       propertyPath: powerUpOdds
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -7763206737115200131, guid: 7c8156bf8d8405d47b048c36dab0bd89, type: 3}
       propertyPath: airJumpForce
