@@ -107,22 +107,22 @@ public class Player : MonoBehaviour
 			}
 			else 
 			{
-                Instantiate(AudioManager.manager.damage, transform.position, transform.rotation);
+				Instantiate(AudioManager.manager.damage, transform.position, transform.rotation);
 				Die();
-            }
+			}
 			break;
 
 			case "NotDashableEnemy":
-            Instantiate(AudioManager.manager.damage, transform.position, transform.rotation);
-            Die();
+			Instantiate(AudioManager.manager.damage, transform.position, transform.rotation);
+			Die();
 			break;
 
 			case "TutorialEnemy":
 			if(isDashing || isStabbing) 
 			{
 				Kill(collision);
-                Instantiate(AudioManager.manager.katanaHit, transform.position, transform.rotation);
-                if (!isDashing) isStabbing = false;
+				Instantiate(AudioManager.manager.katanaHit, transform.position, transform.rotation);
+				if (!isDashing) isStabbing = false;
 			}
 			else
 			{
@@ -142,6 +142,7 @@ public class Player : MonoBehaviour
 				StopAllCoroutines();
 				StopDash();
 				Instantiate(AudioManager.manager.jumpPwP, transform.position, transform.rotation);
+				collision.gameObject.GetComponentInChildren<Animator>().SetTrigger("OnPlayerContact");
 				body.AddForce(UnityEngine.Vector3.up * dashJumpForce);
 			}
 			break;
@@ -151,8 +152,8 @@ public class Player : MonoBehaviour
 			GameManager.manager.AddPoints(1);
 			collision.gameObject.SetActive(false);
 			GameManager.manager.SetAchievement(0);
-            GameManager.manager.UiManager.PopUp(0);
-            break;
+			GameManager.manager.UiManager.PopUp(0);
+			break;
 
 			case "TutorialHole":
 			Recoil();
@@ -255,9 +256,9 @@ public class Player : MonoBehaviour
 	
 	void Die()
 	{
-        GameManager.manager.SetAchievement(3);
+		GameManager.manager.SetAchievement(3);
 		GameManager.manager.UiManager.PopUp(3);
-        GameManager.manager.EndGame();
+		GameManager.manager.EndGame();
 		GameManager.manager.UiManager.EndGameScreen(GameManager.manager.finalMeters, GameManager.manager.coins);
 	}
 
