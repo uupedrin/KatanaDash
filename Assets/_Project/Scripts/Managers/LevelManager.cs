@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField]
-    float blockSize;
-    [SerializeField]
-    GameObject[] Blocks;
-    [SerializeField]
-    GameObject player;
+    public float blockSize;
+    [SerializeField] GameObject[] Blocks;
+    [SerializeField] GameObject player;
     int numberOfBlocks;
     int currentBlock;
     int blockNumber;
