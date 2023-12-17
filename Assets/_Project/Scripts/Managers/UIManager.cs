@@ -19,21 +19,33 @@ public class UIManager : MonoBehaviour
 	public GameObject exitMenu;
 	public GameObject cheatsMenu;
 	public bool isPaused;
-    bool[] shown = new bool[7];
-    public Image[] images = new Image[7];
-    private void Start()
+	bool[] shown = new bool[7];
+	public Image[] images = new Image[7];
+	
+	[SerializeField] Image shieldImage;
+	[SerializeField] Image swordBeamImage;
+	
+	private void Start()
 	{
 		GameManager.manager.UiManager = this;
 		if(pauseMenu != null) pauseMenu.SetActive(false);
 		if (configMenu != null) configMenu.SetActive(false);
-        for (int i = 0; i < shown.Length; i++)
-        {
-            if (GameManager.manager.data.achievement[i] == true)
-            {
-                shown[i] = true;
-            }
-        }
-    }
+		for (int i = 0; i < shown.Length; i++)
+		{
+			if (GameManager.manager.data.achievement[i] == true)
+			{
+				shown[i] = true;
+			}
+		}
+		
+		if(GameManager.manager.bossTrigger == null)
+		{
+			if(GameObject.FindWithTag("BossCaller") != null)
+			{
+				GameManager.manager.bossTrigger = GameObject.FindWithTag("BossCaller");
+			}
+		}
+	}
 	
 	public void SetCoins(int coins)
 	{
@@ -50,15 +62,15 @@ public class UIManager : MonoBehaviour
 	}
 	public void SetCheats() 
 	{
-        if (cheatsMenu.activeInHierarchy == false)
-        {
-            cheatsMenu.SetActive(true);
-        }
-        else
-        {
-            cheatsMenu.SetActive(false);
-        }
-    }
+		if (cheatsMenu.activeInHierarchy == false)
+		{
+			cheatsMenu.SetActive(true);
+		}
+		else
+		{
+			cheatsMenu.SetActive(false);
+		}
+	}
 	public void SetConfigMenu()
 	{
 		if(configMenu.activeInHierarchy == false) 
@@ -70,40 +82,40 @@ public class UIManager : MonoBehaviour
 			configMenu.SetActive(false);
 		}
 	}
-    public void SetAchivmentsMenu()
-    {
-        if (achivmentsMenu.activeInHierarchy == false)
-        {
-            achivmentsMenu.SetActive(true);
-        }
-        else
-        {
-            achivmentsMenu.SetActive(false);
-        }
-    }
+	public void SetAchivmentsMenu()
+	{
+		if (achivmentsMenu.activeInHierarchy == false)
+		{
+			achivmentsMenu.SetActive(true);
+		}
+		else
+		{
+			achivmentsMenu.SetActive(false);
+		}
+	}
 	public void SetCreditsMenu() 
 	{
-        if (creditsMenu.activeInHierarchy == false)
-        {
-            creditsMenu.SetActive(true);
-        }
-        else
-        {
-            creditsMenu.SetActive(false);
-        }
-    }
-    public void SetExitMenu()
-    {
-        if (exitMenu.activeInHierarchy == false)
-        {
-            exitMenu.SetActive(true);
-        }
-        else
-        {
-            exitMenu.SetActive(false);
-        }
-    }
-    public void PauseGame()
+		if (creditsMenu.activeInHierarchy == false)
+		{
+			creditsMenu.SetActive(true);
+		}
+		else
+		{
+			creditsMenu.SetActive(false);
+		}
+	}
+	public void SetExitMenu()
+	{
+		if (exitMenu.activeInHierarchy == false)
+		{
+			exitMenu.SetActive(true);
+		}
+		else
+		{
+			exitMenu.SetActive(false);
+		}
+	}
+	public void PauseGame()
 	{
 		if(isPaused) 
 		{
@@ -141,18 +153,50 @@ public class UIManager : MonoBehaviour
 	{
 		Application.Quit();
 	}
-    public void PopUp(int i)
-    {
-        if (!shown[i])
-        {
-            images[i].gameObject.SetActive(true);
+	public void PopUp(int i)
+	{
+		if (!shown[i])
+		{
+			images[i].gameObject.SetActive(true);
 			shown[i] = true;
-        }
-        StartCoroutine(RemovePopUp(i));
-    }
-    IEnumerator RemovePopUp(int i)
-    {
-        yield return new WaitForSeconds(3);
-        images[i].gameObject.SetActive(false);
-    }
+		}
+		StartCoroutine(RemovePopUp(i));
+	}
+	IEnumerator RemovePopUp(int i)
+	{
+		yield return new WaitForSeconds(3);
+		images[i].gameObject.SetActive(false);
+	}
+	
+	public void BossCheat()
+	{
+		GameManager.manager.BossCheat();
+	}
+	
+	public void InvulnerableCheat()
+	{
+		GameManager.manager.InvulnerableCheat();
+	}
+	
+	public void DamageCheat()
+	{
+		GameManager.manager.DamageCheat();
+	}
+	
+	public void ToggleShieldImage(bool state)
+	{
+		if(!GameManager.manager.immortal)
+		{
+			shieldImage.gameObject.SetActive(state);
+		}
+		else
+		{
+			shieldImage.gameObject.SetActive(true);
+		}
+	}
+	
+	public void ToggleBeamImage(bool state)
+	{
+		swordBeamImage.gameObject.SetActive(state);
+	}
 }

@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 	public bool bossFight;
 	public bool immortal = false;
 	public bool damageCheat = false;
-	[SerializeField] GameObject bossTrigger;
+	public GameObject bossTrigger;
 
 	void Awake()
 	{
@@ -134,6 +134,8 @@ public class GameManager : MonoBehaviour
 	public void InvulnerableCheat()
 	{
 		immortal = !immortal;
+		if(immortal) UiManager.ToggleShieldImage(true);
+		else UiManager.ToggleShieldImage(false);
 	}
 
 	public void DamageCheat()
