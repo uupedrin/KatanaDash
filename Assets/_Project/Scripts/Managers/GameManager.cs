@@ -2,30 +2,30 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	[SerializeField]
-	public int coins = 0;
-	[SerializeField]
-	public float metersRan;
-	[SerializeField]
-	public float metersTimer;
-	[SerializeField]
-	public float finalMeters;
+	[SerializeField] public int coins = 0;
+	[SerializeField] public float metersRan;
+	[SerializeField] public float metersTimer;
+	[SerializeField] public float finalMeters;
 	public static GameManager manager;
 	public UIManager UiManager;
 	public AchievmentsPopUp AchievmentsPopUp;
 	public float freezeDuration;
-	[SerializeField]
-	public Achievements data;
+	[SerializeField] public Achievements data;
 	public float saveMasterSlider;
 	public float saveMusicSlider;
 	public float saveSfxSlider;
 	public bool bossFight;
+	public bool immortal = false;
+	public bool damageCheat = false;
+	[SerializeField] GameObject bossTrigger;
+
 	void Awake()
 	{
 		if (manager == null)
@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
 			UiManager.PopUp(4);
 		}
 	}
+
 	public void AddPoints(int enemyType)
 	{
 		switch (enemyType)
@@ -84,27 +85,32 @@ public class GameManager : MonoBehaviour
 				break;
 		}
 	}
+
 	public void EndGame()
 	{
 		finalMeters = metersRan;
 	}
+
 	public IEnumerator Freeze()
 	{
 		Time.timeScale = 0;
 		yield return new WaitForSecondsRealtime(freezeDuration);
 		Time.timeScale = 1;
 	}
+
 	public void SetAchievement(int achievementID)
 	{
 		data.achievement[achievementID] = true;
 		SaveToJson();
 	}
+
 	[ContextMenu("Save")]
 	public void SaveToJson()
 	{
 		string json = JsonUtility.ToJson(data, true);
 		File.WriteAllText(Application.persistentDataPath + "/AchievementsFile.json", json);
 	}
+
 	public void LoadFromJson()
 	{
 		string json = "";
@@ -118,6 +124,21 @@ public class GameManager : MonoBehaviour
 			SaveToJson();
 			LoadFromJson();
 		}
+	}
+
+	public void BossCheat()
+	{
+		if(!bossFight) bossTrigger.transform.position = new UnityEngine.Vector3(Camera.main.gameObject.transform.position.x + 5, 0, 0);
+	}
+
+	public void InvulnerableCheat()
+	{
+		immortal = !immortal;
+	}
+
+	public void DamageCheat()
+	{
+		damageCheat = !damageCheat;
 	}
 }
 /*
