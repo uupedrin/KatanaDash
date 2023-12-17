@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
@@ -15,18 +16,23 @@ public class Boss : MonoBehaviour
     [SerializeField] float speedCharge;
     [SerializeField] float chargeDelay;
     [SerializeField] float chargePrepareTime;
+    [SerializeField] GameObject bossTrigger;
     float nextAttack;
     int heat;
     bool waiting;
     bool attacking;
     bool retreating;
+    bool canGo;
 
     void OnEnable()
     {
+        canGo = false;
         heat = 0;
         waiting = true;
+        attacking = false;
+        retreating = false;
         health = maxHealth;
-        transform.position = new UnityEngine.Vector3(player.transform.position.x - (player.transform.position.x % level.blockSize) + level.blockSize * 2, 0, 0);
+        transform.position = new UnityEngine.Vector3(player.transform.position.x - (player.transform.position.x % level.blockSize) + level.blockSize * 2, 2, 0);
     }
 
     void Update()
@@ -39,7 +45,7 @@ public class Boss : MonoBehaviour
         if(attacking) 
         {
             transform.position += speedCharge * Time.deltaTime * UnityEngine.Vector3.left;
-            if(transform.position.x <= player.transform.position.x - 20 || transform.position.x > player.transform.position.x + 10)
+            if(transform.position.x <= player.transform.position.x - 20 || transform.position.x > player.transform.position.x + bossDistance)
             {
                 attacking = false;
                 waiting = true;
@@ -51,7 +57,7 @@ public class Boss : MonoBehaviour
             transform.position += 70 * Time.deltaTime * UnityEngine.Vector3.right;
             if(transform.position.y <= 0) transform.position += 20 * UnityEngine.Vector3.up * Time.deltaTime;
             else transform.position += 20 * UnityEngine.Vector3.down * Time.deltaTime;
-            if(transform.position.y <= 0.3f && transform.position.y >= -0.3f) transform.position = new UnityEngine.Vector3(transform.position.x, 0, 0);
+            if(transform.position.y <= 0.3f && transform.position.y >= -0.3f) transform.position = new UnityEngine.Vector3(transform.position.x, 2, 0);
             if(transform.position.x >= player.transform.position.x + bossDistance) retreating = false;
         }
         else if(!waiting) 
@@ -68,6 +74,7 @@ public class Boss : MonoBehaviour
             }
             else if(heat <= 2 && nextAttack <= Time.time)
             {
+                canGo = true;
                 switch(Random.Range(0,1))
                 {
                     case 0:
@@ -83,17 +90,19 @@ public class Boss : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            if(!player.isDashing) player.Die();
+            if(!player.isDashing && !player.isStabbing  && !GameManager.manager.immortal) player.Die();
             else
             {
                 attacking = false;
                 retreating = true;
-                health--;
+                if(!GameManager.manager.damageCheat) health--;
+                else health = 0;
                 if(health <= 0)
                 {
                     health = maxHealth;
-                    gameObject.SetActive(false);
                     GameManager.manager.bossFight = false;
+                    bossTrigger.transform.position = new UnityEngine.Vector3(transform.position.x + 1000, -2.1f, 0);
+                    gameObject.SetActive(false);
                 }
             }
         }
@@ -113,6 +122,7 @@ public class Boss : MonoBehaviour
 
     void StartCharge()
     {
-        attacking = true;
+        if(canGo) attacking = true;
+        canGo = false;
     }
 }

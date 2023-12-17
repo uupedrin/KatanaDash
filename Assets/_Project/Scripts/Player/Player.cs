@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 	[SerializeField] GameObject boss;
 
 	[Header("PowerUp")]
-	bool isStabbing = false;
+	public bool isStabbing = false;
 	bool hasDashShoot = false;
 	[SerializeField] float dashPowerUpDuration;
 	
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 				Invoke("CantJump", jumpHold);
 			}
 		}
-		if(Input.touchCount >=4) StartCoroutine(Cheat());
+
 		if(body.velocity.y <= -.5)
 		{
 			body.AddForce(UnityEngine.Vector3.up * -1 * 20);
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
 		switch(collision.gameObject.tag)
 		{
 			case "Enemy":
-			if(isDashing || isStabbing) 
+			if(isDashing || isStabbing || GameManager.manager.immortal) 
 			{
 				Instantiate(AudioManager.manager.katanaHit, transform.position, transform.rotation);
 				Instantiate(AudioManager.manager.explosion, transform.position, transform.rotation);
@@ -118,25 +118,6 @@ public class Player : MonoBehaviour
 			case "NotDashableEnemy":
 			Instantiate(AudioManager.manager.damage, transform.position, transform.rotation);
 			Die();
-			break;
-
-			case "TutorialEnemy":
-			if(isDashing || isStabbing) 
-			{
-				Kill(collision);
-				Instantiate(AudioManager.manager.katanaHit, transform.position, transform.rotation);
-				if (!isDashing) isStabbing = false;
-			}
-			else
-			{
-				CantJump();
-				Recoil();
-			}
-			break;
-
-			case "TutorialNotDashableEnemy":
-			CantJump();
-			Recoil();
 			break;
 
 			case "DashJump":
@@ -158,11 +139,6 @@ public class Player : MonoBehaviour
 			GameManager.manager.UiManager.PopUp(0);
 			break;
 
-			case "TutorialHole":
-			Recoil();
-			body.AddForce(UnityEngine.Vector3.up * 500);
-			break;
-
 			case "BlockCaller":
 			procedural.Rearrange();
 			break;
@@ -170,6 +146,16 @@ public class Player : MonoBehaviour
 			case "BossCaller":
 			GameManager.manager.bossFight = true;
 			boss.SetActive(true);
+			break;
+
+			case "Boss":
+			if(isDashing)
+			{
+				Instantiate(AudioManager.manager.katanaHit, transform.position, transform.rotation);
+				playerAnimator.SetTrigger("PlayerHit");
+				StartCoroutine(GameManager.manager.Freeze());
+			}
+			if(!isDashing) isStabbing = false;
 			break;
 		}
 	}
@@ -257,22 +243,6 @@ public class Player : MonoBehaviour
 	bool IsGrounded()
 	{
 		return Physics.Raycast(gameObject.transform.position, UnityEngine.Vector3.down, 1.025874f, layer);
-	}
-
-	IEnumerator Cheat()
-	{
-		body.detectCollisions = false;
-		body.constraints = RigidbodyConstraints.FreezeAll;
-		moveSpeed = cheatSpeed;
-		yield return new WaitUntil(() => transform.position.x >= bossTrigger.transform.position.x - 5);
-		CheatStop();
-	}
-
-	void CheatStop()
-	{
-		moveSpeed = moveSpeedStart;
-		body.constraints = RigidbodyConstraints.FreezeRotation;
-		body.detectCollisions = true;
 	}
 
 	void DropPowerUp()
