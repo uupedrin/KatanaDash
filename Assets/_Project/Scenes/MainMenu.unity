@@ -5504,7 +5504,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Settings
+  m_Text: Achievements
 --- !u!222 &1592249347
 CanvasRenderer:
   m_ObjectHideFlags: 0
