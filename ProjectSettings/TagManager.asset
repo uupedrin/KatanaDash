@@ -18,6 +18,7 @@ TagManager:
   - StabPowerUp
   - BossCaller
   - Boss
+  - PlayerProjectile
   layers:
   - Default
   - TransparentFX
