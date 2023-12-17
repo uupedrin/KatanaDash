@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
 			{
 				if (data.achievement[i]) aux++;
 				
-				if(aux == 5)
+				if(aux == 6)
 				{
 					SetAchievement(6);
 					UiManager.PopUp(6);
