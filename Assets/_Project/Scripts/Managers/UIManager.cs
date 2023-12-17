@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
 	public GameObject creditsMenu;
 	public GameObject endGameMenu;
 	public GameObject exitMenu;
+	public GameObject cheatsMenu;
 	public bool isPaused;
     bool[] shown = new bool[7];
     public Image[] images = new Image[7];
@@ -47,6 +48,17 @@ public class UIManager : MonoBehaviour
 	{
 		SceneManager.LoadScene(scene);
 	}
+	public void SetCheats() 
+	{
+        if (cheatsMenu.activeInHierarchy == false)
+        {
+            cheatsMenu.SetActive(true);
+        }
+        else
+        {
+            cheatsMenu.SetActive(false);
+        }
+    }
 	public void SetConfigMenu()
 	{
 		if(configMenu.activeInHierarchy == false) 
