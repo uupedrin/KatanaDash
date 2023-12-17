@@ -30,7 +30,7 @@ public class PowerUp : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "TutorialEnemy") player.Kill(collision); 
+        if(collision.gameObject.tag == "Enemy") player.Kill(collision); 
     }
 
     void Disable()

@@ -15,7 +15,7 @@ public class Boss : MonoBehaviour
 	[SerializeField] float speedCharge;
 	[SerializeField] float chargeDelay;
 	[SerializeField] float chargePrepareTime;
-	[SerializeField] GameObject bossTrigger;
+	[SerializeField] float respawnDistance;
 	Animator animator;
 	float nextAttack;
 	int heat;
@@ -23,6 +23,7 @@ public class Boss : MonoBehaviour
 	bool attacking;
 	bool retreating;
 	bool canGo;
+	bool isDying;
 
 	void Start()
 	{
@@ -31,6 +32,7 @@ public class Boss : MonoBehaviour
 	
 	void OnEnable()
 	{
+		isDying = false;
 		canGo = false;
 		heat = 0;
 		waiting = true;
@@ -49,6 +51,7 @@ public class Boss : MonoBehaviour
 		}
 		if(attacking) 
 		{
+			GetComponent<Collider>().enabled = true;
 			transform.position += speedCharge * Time.deltaTime * UnityEngine.Vector3.left;
 			if(transform.position.x <= player.transform.position.x - 20 || transform.position.x > player.transform.position.x + bossDistance)
 			{
@@ -83,11 +86,11 @@ public class Boss : MonoBehaviour
 				switch(Random.Range(0,1))
 				{
 					case 0:
-					Attack1();
+					SetUp();
 					break;
 				}
 			}
-			transform.position = new UnityEngine.Vector3(player.transform.position.x + bossDistance, transform.position.y, 0);
+			if(!isDying) transform.position = new UnityEngine.Vector3(player.transform.position.x + bossDistance, transform.position.y, 0);
 		}
 	}
 
@@ -98,24 +101,13 @@ public class Boss : MonoBehaviour
 			if(!player.isDashing && !player.isStabbing  && !GameManager.manager.immortal) player.Die();
 			else
 			{
-				animator.SetTrigger("TakeDamage");
-				attacking = false;
-				retreating = true;
-				if(!GameManager.manager.damageCheat) health--;
-				else health = 0;
-				if(health <= 0)
-				{
-					GameManager.manager.SetAchievement(5);
-					health = maxHealth;
-					GameManager.manager.bossFight = false;
-					bossTrigger.transform.position = new UnityEngine.Vector3(transform.position.x + 1000, -2.1f, 0);
-					gameObject.SetActive(false);
-				}
+				TakeDamage();
 			}
 		}
+		else if(collision.tag == "PlayerProjectile") TakeDamage();
 	}
 
-	void Attack1()
+	void SetUp()
 	{
 		nextAttack = Time.time + cooldown;
 		heat++;
@@ -132,5 +124,32 @@ public class Boss : MonoBehaviour
 	{
 		if(canGo) attacking = true;
 		canGo = false;
+	}
+
+	void RespawnBoss()
+	{
+		transform.position = player.transform.position + respawnDistance * UnityEngine.Vector3.right;
+		respawnDistance -= respawnDistance * 0.32f;
+		isDying = false;
+	}
+
+	void TakeDamage()
+	{
+		GetComponent<Collider>().enabled = false;
+		animator.SetTrigger("TakeDamage");
+		attacking = false;
+		retreating = true;
+		if(!GameManager.manager.damageCheat) health--;
+		else health = 0;
+		if(health <= 0)
+		{
+			health = 1;
+			GameManager.manager.SetAchievement(5);
+			GameManager.manager.bossFight = false;
+			isDying = true;
+			retreating = false;
+			animator.SetTrigger("Die");
+			Invoke("RespawnBoss", 1.75f);
+		}
 	}
 }
