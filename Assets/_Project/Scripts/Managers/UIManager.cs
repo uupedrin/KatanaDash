@@ -25,6 +25,9 @@ public class UIManager : MonoBehaviour
 	[SerializeField] Image shieldImage;
 	[SerializeField] Image swordBeamImage;
 	
+	[SerializeField] Image invulnerableImage;
+	[SerializeField] Image extraDamageImage;
+	
 	private void Start()
 	{
 		GameManager.manager.UiManager = this;
@@ -45,6 +48,15 @@ public class UIManager : MonoBehaviour
 				GameManager.manager.bossTrigger = GameObject.FindWithTag("BossCaller");
 			}
 		}
+		
+		if(GameManager.manager.immortal)
+		{
+			ToggleShieldImage(GameManager.manager.immortal);
+		}
+		
+		ToggleShieldCheatSide(GameManager.manager.immortal);
+		ToggleDamageCheatSide(GameManager.manager.damageCheat);
+		
 	}
 	
 	public void SetCoins(int coins)
@@ -187,16 +199,25 @@ public class UIManager : MonoBehaviour
 	{
 		if(!GameManager.manager.immortal)
 		{
-			shieldImage.gameObject.SetActive(state);
+			if(shieldImage != null)	shieldImage.gameObject.SetActive(state);
 		}
 		else
 		{
-			shieldImage.gameObject.SetActive(true);
+			if(shieldImage != null)	shieldImage.gameObject.SetActive(true);
 		}
 	}
 	
 	public void ToggleBeamImage(bool state)
 	{
-		swordBeamImage.gameObject.SetActive(state);
+		if(swordBeamImage != null)	swordBeamImage.gameObject.SetActive(state);
+	}
+	
+	public void ToggleShieldCheatSide(bool state)
+	{
+		if(invulnerableImage != null) invulnerableImage.gameObject.SetActive(state);
+	}
+	public void ToggleDamageCheatSide(bool state)
+	{
+		if(extraDamageImage != null) extraDamageImage.gameObject.SetActive(state);
 	}
 }

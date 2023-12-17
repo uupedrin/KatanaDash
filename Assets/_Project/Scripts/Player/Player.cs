@@ -157,7 +157,7 @@ public class Player : MonoBehaviour
 			break;
 
 			case "Boss":
-			if(isDashing)
+			if(isDashing || isStabbing || GameManager.manager.immortal)
 			{
 				Instantiate(AudioManager.manager.katanaHit, transform.position, transform.rotation);
 				playerAnimator.SetTrigger("PlayerHit");
