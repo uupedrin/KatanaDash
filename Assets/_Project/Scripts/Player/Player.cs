@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 
 	[Header("PowerUp")]
 	public bool isStabbing = false;
-	bool hasDashShoot = false;
+	public bool hasDashShoot = false;
 	[SerializeField] float dashPowerUpDuration;
 	
 	[Header("Other")]
@@ -95,6 +95,21 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	void OnTriggerStay(Collider collision)
+	{
+		if(collision.CompareTag("DashJump"))
+		{
+			if(isDashing) 
+			{
+				StopAllCoroutines();
+				StopDash();
+				Instantiate(AudioManager.manager.jumpPwP, transform.position, transform.rotation);
+				collision.gameObject.GetComponentInChildren<Animator>().SetTrigger("OnPlayerContact");
+				body.AddForce(UnityEngine.Vector3.up * dashJumpForce);
+			}
+		}
+	}
+	
 	void OnTriggerEnter(Collider collision)
 	{
 		switch(collision.gameObject.tag)
@@ -106,7 +121,11 @@ public class Player : MonoBehaviour
 				Instantiate(AudioManager.manager.explosion, transform.position, transform.rotation);
 				Kill(collision);
 				DropPowerUp();
-				if(!isDashing) isStabbing = false;
+				if(!isDashing) 
+				{
+					isStabbing = false;
+					GameManager.manager.UiManager.ToggleShieldImage(isStabbing);
+				}
 			}
 			else 
 			{
@@ -118,17 +137,6 @@ public class Player : MonoBehaviour
 			case "NotDashableEnemy":
 			Instantiate(AudioManager.manager.damage, transform.position, transform.rotation);
 			Die();
-			break;
-
-			case "DashJump":
-			if(isDashing) 
-			{
-				StopAllCoroutines();
-				StopDash();
-				Instantiate(AudioManager.manager.jumpPwP, transform.position, transform.rotation);
-				collision.gameObject.GetComponentInChildren<Animator>().SetTrigger("OnPlayerContact");
-				body.AddForce(UnityEngine.Vector3.up * dashJumpForce);
-			}
 			break;
 
 			case "Coin":
@@ -155,7 +163,11 @@ public class Player : MonoBehaviour
 				playerAnimator.SetTrigger("PlayerHit");
 				StartCoroutine(GameManager.manager.Freeze());
 			}
-			if(!isDashing) isStabbing = false;
+			if(!isDashing) 
+			{
+				isStabbing = false;
+				GameManager.manager.UiManager.ToggleShieldImage(isStabbing);
+			} 
 			break;
 		}
 	}
@@ -238,6 +250,7 @@ public class Player : MonoBehaviour
 		GameManager.manager.UiManager.PopUp(3);
 		GameManager.manager.EndGame();
 		GameManager.manager.UiManager.EndGameScreen(GameManager.manager.finalMeters, GameManager.manager.coins);
+		GameManager.manager.bossFight = false;
 	}
 
 	bool IsGrounded()
@@ -251,11 +264,13 @@ public class Player : MonoBehaviour
 		{
 			case 0:
 			isStabbing = true;
+			GameManager.manager.UiManager.ToggleShieldImage(isStabbing);
 			Instantiate(AudioManager.manager.damage, transform.position, transform.rotation);
 			break;
 
 			case 1:
 			hasDashShoot = true;
+			GameManager.manager.UiManager.ToggleBeamImage(hasDashShoot);
 			Invoke("DashPowerUpOver", dashPowerUpDuration);
 			Instantiate(AudioManager.manager.damage, transform.position, transform.rotation);
 			break;
@@ -275,6 +290,7 @@ public class Player : MonoBehaviour
 	void DashPowerUpOver()
 	{
 		hasDashShoot = false;
+		GameManager.manager.UiManager.ToggleBeamImage(hasDashShoot);
 	}
 
 	void NormalMoveSpeed()

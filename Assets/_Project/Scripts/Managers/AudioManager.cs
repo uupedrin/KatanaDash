@@ -8,13 +8,13 @@ using UnityEngine.UI;
 public class AudioManager : MonoBehaviour
 {
 	[SerializeField] private AudioMixer mixer;
-    public static AudioManager manager;
-    public Slider masterSlider;
+	public static AudioManager manager;
+	public Slider masterSlider;
 	public Slider musicSlider;
 	public Slider sfxSlider;
 	public GameObject buttonClick;
-    public GameObject coin;
-    public GameObject damage;
+	public GameObject coin;
+	public GameObject damage;
 	public GameObject dash;
 	public GameObject explosion;
 	public GameObject jumpPwP;
@@ -30,24 +30,25 @@ public class AudioManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
-		masterSlider.value = GameManager.manager.saveMasterSlider;
-		musicSlider.value = GameManager.manager.saveMusicSlider;
-		sfxSlider.value = GameManager.manager.saveSfxSlider;
+		
+		if(masterSlider != null) masterSlider.value = GameManager.manager.saveMasterSlider;
+		if(musicSlider != null) musicSlider.value = GameManager.manager.saveMusicSlider;
+		if(sfxSlider != null) sfxSlider.value = GameManager.manager.saveSfxSlider;
 	}
 	public void ChangeMasterVol()
 	{
 		mixer.SetFloat("MasterVolume", (masterSlider.value));
-        GameManager.manager.saveMasterSlider = masterSlider.value;
-    }
+		GameManager.manager.saveMasterSlider = masterSlider.value;
+	}
 	public void ChangeMusicVol()
 	{
 		mixer.SetFloat("MusicVolume",(musicSlider.value));
-        GameManager.manager.saveMusicSlider = musicSlider.value;
+		GameManager.manager.saveMusicSlider = musicSlider.value;
 	}
 	public void ChangeSFXVol()
 	{
 		mixer.SetFloat("SfxVolume", (sfxSlider.value));
-        GameManager.manager.saveSfxSlider = sfxSlider.value;
+		GameManager.manager.saveSfxSlider = sfxSlider.value;
 	}
 	public void PlayClick() 
 	{
