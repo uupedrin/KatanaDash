@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3421430846944435415}
-  - component: {fileID: -3198774036588674016}
   m_Layer: 0
   m_Name: Stephen
   m_TagString: Untagged
@@ -33,21 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &-3198774036588674016
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4961795440522851232}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1001 &1127903145854349474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,6 +103,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stephen
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 92075234df9b5224c8dd2deff354f219, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 92a3ef175a9dda844b97bb38ca0b5dbd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92075234df9b5224c8dd2deff354f219, type: 3}
 --- !u!4 &589308073547192137 stripped
