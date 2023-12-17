@@ -51,7 +51,6 @@ public class Boss : MonoBehaviour
 		}
 		if(attacking) 
 		{
-			GetComponent<Collider>().enabled = true;
 			transform.position += speedCharge * Time.deltaTime * UnityEngine.Vector3.left;
 			if(transform.position.x <= player.transform.position.x - 20 || transform.position.x > player.transform.position.x + bossDistance)
 			{
@@ -117,6 +116,7 @@ public class Boss : MonoBehaviour
 	{
 		heat = 0;
 		animator.SetTrigger("StartAttack");
+		GetComponent<Collider>().enabled = true;
 		Invoke("StartCharge", chargeDelay);
 	}
 
@@ -129,7 +129,7 @@ public class Boss : MonoBehaviour
 	void RespawnBoss()
 	{
 		transform.position = player.transform.position + respawnDistance * UnityEngine.Vector3.right;
-		respawnDistance -= respawnDistance * 0.32f;
+		respawnDistance -= Mathf.Clamp( respawnDistance * 0.32f, 40, 240);
 		isDying = false;
 	}
 
@@ -145,6 +145,7 @@ public class Boss : MonoBehaviour
 		{
 			health = 1;
 			GameManager.manager.SetAchievement(5);
+			GameManager.manager.UiManager.PopUp(5);
 			GameManager.manager.bossFight = false;
 			isDying = true;
 			retreating = false;

@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3421430846944435415}
+  - component: {fileID: 8512205066279808817}
+  - component: {fileID: 8512205066279808815}
   m_Layer: 0
   m_Name: Stephen
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,6 +34,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8512205066279808817
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4961795440522851232}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.4439499
+  m_Height: 4.102174
+  m_Direction: 0
+  m_Center: {x: 0.017272472, y: 0.91978574, z: 0}
+--- !u!114 &8512205066279808815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4961795440522851232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a01d319e4eade34f849391e5bbb248f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  player: {fileID: 0}
+  level: {fileID: 0}
+  bossDistance: 15
+  cooldown: 1
+  speedCharge: 15
+  chargeDelay: 2
+  chargePrepareTime: 2
+  respawnDistance: 240
 --- !u!1001 &1127903145854349474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92075234df9b5224c8dd2deff354f219, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92075234df9b5224c8dd2deff354f219, type: 3}
       propertyPath: m_LocalPosition.z
@@ -103,10 +140,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stephen
       objectReference: {fileID: 0}
+    - target: {fileID: 2615098005764110949, guid: 92075234df9b5224c8dd2deff354f219, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eddbf01732ec88e41ba511ab5f16a415, type: 2}
     - target: {fileID: 5866666021909216657, guid: 92075234df9b5224c8dd2deff354f219, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 92a3ef175a9dda844b97bb38ca0b5dbd, type: 2}
+    - target: {fileID: 6222601711669020359, guid: 92075234df9b5224c8dd2deff354f219, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.23299092
+      objectReference: {fileID: 0}
+    - target: {fileID: 6222601711669020359, guid: 92075234df9b5224c8dd2deff354f219, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.23299089
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92075234df9b5224c8dd2deff354f219, type: 3}
 --- !u!4 &589308073547192137 stripped

@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -100,8 +97,23 @@ public class GameManager : MonoBehaviour
 
 	public void SetAchievement(int achievementID)
 	{
+		bool lastState;
+		lastState = data.achievement[achievementID];
 		data.achievement[achievementID] = true;
 		SaveToJson();
+		if(!lastState)
+		{
+			for (int i = 0, aux = 0; i < data.achievement.Length-1; i++) 
+			{
+				if (data.achievement[i]) aux++;
+				
+				if(aux == 5)
+				{
+					SetAchievement(6);
+					UiManager.PopUp(6);
+				}
+			}
+		}
 	}
 
 	[ContextMenu("Save")]
@@ -134,13 +146,26 @@ public class GameManager : MonoBehaviour
 	public void InvulnerableCheat()
 	{
 		immortal = !immortal;
-		if(immortal) UiManager.ToggleShieldImage(true);
-		else UiManager.ToggleShieldImage(false);
+		if(immortal)
+		{
+			UiManager.ToggleShieldImage(true);
+			UiManager.ToggleShieldCheatSide(true);
+		}
+		else
+		{
+			UiManager.ToggleShieldImage(false);
+			UiManager.ToggleShieldCheatSide(false);
+		}
 	}
 
 	public void DamageCheat()
 	{
 		damageCheat = !damageCheat;
+		if(damageCheat) UiManager.ToggleDamageCheatSide(true);
+		else
+		{
+			UiManager.ToggleDamageCheatSide(false);
+		}
 	}
 }
 /*
